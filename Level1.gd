@@ -18,7 +18,7 @@ func _process(delta):
 		var mpos = get_viewport().get_mouse_position()
 		placing.look_at(mpos)
 		var diff = mpos - from.position
-		placing.get_node("Sprite").scale.x = diff.length() / 32.0
+		placing.get_node("Sprite").rect_size.x = diff.length()
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		print("PHYSICS!")
@@ -52,7 +52,7 @@ func _unhandled_input(event):
 				# Update the placing node, so that _place_beam puts the end at the right place.
 				var position = joint.get_global_transform().origin #+ Vector2(100, 100)
 				placing.look_at(position)
-				placing.get_node("Sprite").scale.x = (position - from.position).length() / 32.0
+				placing.get_node("Sprite").rect_size.x = (position - from.position).length()
 				_place_beam(position)
 				return
 		_place_beam(event.position)
@@ -84,7 +84,7 @@ func _on_Joint_clicked(joint):
 #		#_place_beam(position)
 
 func _place_beam(position):
-	if placing.get_node("Sprite").scale.x > 0.5:
+	if placing.get_node("Sprite").rect_size.x > 16:
 		var beam = Beam.instance()
 		add_child(beam)
 		beam.set_position(placing.get_position())

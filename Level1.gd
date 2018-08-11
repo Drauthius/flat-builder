@@ -90,8 +90,10 @@ func _place_beam(position, other_joint = null):
 		beam.set_position(placing.get_position())
 		beam.set_rotation(placing.get_rotation())
 		var length = (position - from.position).length()
-		beam.get_node("Mid/TextureRect").rect_size.x = length
-		beam.get_node("Right").position = Vector2(length, 0)
+		#beam.get_node("Mid/TextureRect").rect_size.x = length
+		#beam.get_node("Right").position = Vector2(length, 0)
+		#beam.get_node("Right/CollisionShape2D").position = Vector2(length - 60, 0)
+		#beam.get_node("Right/CollisionShape2D").position = Vector2(length, 0)
 		#beam.get_node("Mid/CollisionShape2D").shape.extents.x = length / 2
 		#beam.get_node("Mid/CollisionShape2D").position.x = length / 2 - 30
 		beam.get_node("Left").connect("clicked", self, "_on_Joint_clicked")
@@ -102,16 +104,23 @@ func _place_beam(position, other_joint = null):
 		
 		var joint = PinJoint2D.new()
 		joint.position = from.position
+		add_child(joint)
+		print(joint.position)
+		print(from.joint.get_name())
+		print(from.joint.get_path())
+		print(beam.get_node("Left").get_path())
 		joint.node_a = from.joint.get_path()
 		joint.node_b = beam.get_node("Left").get_path()
-		add_child(joint)
-
-		if other_joint:
-			joint = PinJoint2D.new()
-			joint.position = other_joint.get_global_transform().origin
-			joint.node_a = other_joint.get_path()
-			joint.node_b = beam.get_node("Right").get_path()
-			add_child(joint)
+		joint.disable_collision = true
+		#joint.node_a = NodePath("./GroundJoint")
+		#joint.node_b = NodePath("./Beam/Left")
+#
+#		if other_joint:
+#			joint = PinJoint2D.new()
+#			joint.position = other_joint.get_global_transform().origin
+#			joint.node_a = other_joint.get_path()
+#			joint.node_b = beam.get_node("Right").get_path()
+#			add_child(joint)
 		#print("bye")
 	placing.queue_free()
 	placing = null

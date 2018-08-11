@@ -130,6 +130,8 @@ func _place_beam(position, other_joint = null):
 		joints.append(beam.get_node("Left"))
 		joints.append(beam.get_node("Right"))
 		
+		# Have to yield here, or the thing goes haywire once the body is set to
+		# rigid.
 		yield(get_tree(), "idle_frame")
 		var joint = PinJoint2D.new()
 		#joint.position = from.position

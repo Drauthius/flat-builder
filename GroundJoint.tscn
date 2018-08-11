@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 8.20557
+radius = 9.8012
 
 [node name="GroundJoint" type="RigidBody2D"]
 

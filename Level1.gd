@@ -26,6 +26,11 @@ func _process(delta):
 
 func play():
 	playing = true
+	
+	#var joint = $PinJoint2D
+	#joint.node_a = NodePath("../GroundJoint")
+	#joint.node_b = NodePath("../Beam/Left")
+	
 	for beam in beams:
 		beam.get_node("Mid").mode = RigidBody2D.MODE_RIGID
 		beam.get_node("Left").mode = RigidBody2D.MODE_RIGID
@@ -86,41 +91,81 @@ func _on_Joint_clicked(joint):
 func _place_beam(position, other_joint = null):
 	if placing.get_node("Sprite").rect_size.x > 16:
 		var beam = Beam.instance()
-		add_child(beam)
 		beam.set_position(placing.get_position())
 		beam.set_rotation(placing.get_rotation())
+		add_child(beam)
+		
 		var length = (position - from.position).length()
-		#beam.get_node("Mid/TextureRect").rect_size.x = length
-		#beam.get_node("Right").position = Vector2(length, 0)
-		#beam.get_node("Right/CollisionShape2D").position = Vector2(length - 60, 0)
+		beam.get_node("Mid/TextureRect").rect_size.x = length
+		beam.get_node("Right").position = Vector2(length, 0)
+		
+		# This is utter shit. The joint connecting the right ball to the beam has to be added here, or it will snap back to the original position
+		# once the mode is changed to rigid.
+		yield(get_tree(), "idle_frame")
+		var meh1 = PinJoint2D.new()
+		meh1.position = beam.get_node("Left").position - Vector2(30, 0)
+		#meh.position = Vector2(-30, 0)
+		meh1.node_a = beam.get_node("Mid").get_path()
+		meh1.node_b = beam.get_node("Left").get_path()
+		beam.get_node("Mid").add_child(meh1)
+		
+		var meh2 = PinJoint2D.new()
+		meh2.position = beam.get_node("Right").position - Vector2(30, 0)
+		#meh.position = Vector2(-30, 0)
+		meh2.node_a = beam.get_node("Mid").get_path()
+		meh2.node_b = beam.get_node("Right").get_path()
+		beam.get_node("Mid").add_child(meh2)
+		#beam.remove_child(beam.get_node("Mid/PinJoint2D2"))
+		#beam.get_node("Mid/PinJoint2D2").position = Vector2(length, 0)
+		#beam.get_node("Right/CollisionShape2D").position = Vector2(0, 0) # Vector2(length - 60, 0)
 		#beam.get_node("Right/CollisionShape2D").position = Vector2(length, 0)
-		#beam.get_node("Mid/CollisionShape2D").shape.extents.x = length / 2
-		#beam.get_node("Mid/CollisionShape2D").position.x = length / 2 - 30
+		#var meh3 = RectangleShape2D.new()
+		#beam.get_node("Mid/CollisionShape2D").instance()
+		beam.get_node("Mid/CollisionShape2D").set_shape(beam.get_node("Mid/CollisionShape2D").get_shape().duplicate(true))
+		beam.get_node("Mid/CollisionShape2D").shape.extents.x = length / 2 - 10
+		beam.get_node("Mid/CollisionShape2D").position.x = length / 2 - 30
 		beam.get_node("Left").connect("clicked", self, "_on_Joint_clicked")
 		beam.get_node("Right").connect("clicked", self, "_on_Joint_clicked")
 		beams.append(beam)
 		joints.append(beam.get_node("Left"))
 		joints.append(beam.get_node("Right"))
 		
+		yield(get_tree(), "idle_frame")
 		var joint = PinJoint2D.new()
-		joint.position = from.position
-		add_child(joint)
-		print(joint.position)
-		print(from.joint.get_name())
-		print(from.joint.get_path())
-		print(beam.get_node("Left").get_path())
+		#joint.position = from.position
+		joint.position = meh1.position
+		#joint.position = beam.get_node("Mid").get_transform().xform_inv(from.position)
+		#joint.position = $GroundJoint.position
+		beam.get_node("Mid").add_child(joint)
+		#add_child(joint)
+		#print($GroundJoint)
+		#print($GroundJoint.get_path())
+		#print(joint.position)
+		#print(from.joint.get_name())
+		#print(from.joint.get_path())
+		#print(beam.get_node("Left").get_path())
 		joint.node_a = from.joint.get_path()
 		joint.node_b = beam.get_node("Left").get_path()
-		joint.disable_collision = true
-		#joint.node_a = NodePath("./GroundJoint")
-		#joint.node_b = NodePath("./Beam/Left")
-#
-#		if other_joint:
-#			joint = PinJoint2D.new()
-#			joint.position = other_joint.get_global_transform().origin
-#			joint.node_a = other_joint.get_path()
-#			joint.node_b = beam.get_node("Right").get_path()
-#			add_child(joint)
+		#joint.softness = 0
+		#joint.bias = 0
+		#joint.disable_collision = true
+		#joint.node_b = NodePath("../GroundJoint")
+		#joint.node_a = NodePath("../Beam/Left")
+		
+		#var joint = $PinJoint2D
+		#joint.node_a = NodePath("../GroundJoint")
+		#joint.node_b = NodePath("../Beam/Left")
+
+		if other_joint:
+			joint = PinJoint2D.new()
+			joint.position = meh2.position
+			#joint.position = other_joint.get_global_transform().origin
+			#joint.position = beam.get_transform().xform_inv(other_joint.get_global_transform().origin)
+			joint.node_a = other_joint.get_path()
+			joint.node_b = beam.get_node("Right").get_path()
+			#add_child(joint)
+			#beam.add_child(joint)
+			beam.get_node("Mid").add_child(joint)
 		#print("bye")
 	placing.queue_free()
 	placing = null

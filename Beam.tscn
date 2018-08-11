@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 32, 8 )
+extents = Vector2( 21.9366, 8 )
 
 [sub_resource type="CircleShape2D" id=2]
 
@@ -39,7 +39,7 @@ linear_velocity = Vector2( 0, 0 )
 linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Angular", "Applied Forces", "Linear", "Material", "Transform", "Visibility" ]
 __meta__ = {
 "_edit_group_": true
 }
@@ -67,6 +67,7 @@ _sections_unfolded = [ "Anchor", "Margin", "Mouse", "Rect" ]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mid" index="1"]
 
 shape = SubResource( 1 )
+disabled = true
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Left" type="RigidBody2D" parent="." index="1"]
@@ -96,20 +97,21 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PinJoint2D" type="PinJoint2D" parent="Left" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left" index="0"]
 
-position = Vector2( -0.000530243, -0.240665 )
-node_a = NodePath("../../Mid")
-node_b = NodePath("..")
+shape = SubResource( 2 )
+disabled = true
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Left/CollisionShape2D" index="0"]
+
+node_a = NodePath("../../../Mid")
+node_b = NodePath("../..")
 bias = 0.0
 disable_collision = true
 softness = 0.0
+_sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Left" index="1"]
-
-shape = SubResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="Left" index="2"]
+[node name="Sprite" type="Sprite" parent="Left/CollisionShape2D" index="1"]
 
 texture = ExtResource( 3 )
 
@@ -141,22 +143,25 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PinJoint2D2" type="PinJoint2D" parent="Right" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right" index="0"]
 
-position = Vector2( 0.189453, -0.146193 )
-node_a = NodePath("../../Mid")
-node_b = NodePath("..")
+shape = SubResource( 2 )
+disabled = true
+_sections_unfolded = [ "Transform" ]
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Right/CollisionShape2D" index="0"]
+
+node_a = NodePath("../../../Mid")
+node_b = NodePath("../..")
 bias = 0.0
 disable_collision = true
 softness = 0.0
+_sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Right" index="1"]
-
-shape = SubResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="Right" index="2"]
+[node name="Sprite" type="Sprite" parent="Right/CollisionShape2D" index="1"]
 
 texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
 
 [connection signal="input_event" from="Left" to="Left" method="_on_Joint_input_event"]
 

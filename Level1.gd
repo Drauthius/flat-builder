@@ -20,7 +20,7 @@ func _process(delta):
 		var diff = mpos - from.position
 		placing.get_node("Sprite").rect_size.x = diff.length()
 	
-	if Input.is_action_just_pressed("ui_accept"):
+	if not playing and Input.is_action_just_pressed("ui_accept"):
 		print("PHYSICS!")
 		play()
 
@@ -53,7 +53,7 @@ func _unhandled_input(event):
 				var position = joint.get_global_transform().origin #+ Vector2(100, 100)
 				placing.look_at(position)
 				placing.get_node("Sprite").rect_size.x = (position - from.position).length()
-				_place_beam(position)
+				_place_beam(position, joint)
 				return
 		_place_beam(event.position)
 
@@ -83,7 +83,7 @@ func _on_Joint_clicked(joint):
 #		from = null
 #		#_place_beam(position)
 
-func _place_beam(position):
+func _place_beam(position, other_joint = null):
 	if placing.get_node("Sprite").rect_size.x > 16:
 		var beam = Beam.instance()
 		add_child(beam)
@@ -92,8 +92,8 @@ func _place_beam(position):
 		var length = (position - from.position).length()
 		beam.get_node("Mid/TextureRect").rect_size.x = length
 		beam.get_node("Right").position = Vector2(length, 0)
-		beam.get_node("Mid/CollisionShape2D").shape.extents.x = length / 2
-		beam.get_node("Mid/CollisionShape2D").position.x = length / 2 - 30
+		#beam.get_node("Mid/CollisionShape2D").shape.extents.x = length / 2
+		#beam.get_node("Mid/CollisionShape2D").position.x = length / 2 - 30
 		beam.get_node("Left").connect("clicked", self, "_on_Joint_clicked")
 		beam.get_node("Right").connect("clicked", self, "_on_Joint_clicked")
 		beams.append(beam)
@@ -102,10 +102,16 @@ func _place_beam(position):
 		
 		var joint = PinJoint2D.new()
 		joint.position = from.position
-		joint.softness = 0
 		joint.node_a = from.joint.get_path()
 		joint.node_b = beam.get_node("Left").get_path()
 		add_child(joint)
+
+		if other_joint:
+			joint = PinJoint2D.new()
+			joint.position = other_joint.get_global_transform().origin
+			joint.node_a = other_joint.get_path()
+			joint.node_b = beam.get_node("Right").get_path()
+			add_child(joint)
 		#print("bye")
 	placing.queue_free()
 	placing = null

@@ -1,11 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
-[ext_resource path="res://sprites/sky.png" type="Texture" id=2]
+[ext_resource path="res://sprites/landscape.png" type="Texture" id=2]
 [ext_resource path="res://sprites/grass.png" type="Texture" id=3]
 [ext_resource path="res://sprites/grass-l.png" type="Texture" id=4]
 [ext_resource path="res://sprites/grass-r.png" type="Texture" id=5]
 [ext_resource path="res://scenes/GroundJoint.tscn" type="PackedScene" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 924.544, 66.0884 )
 
 [node name="Game" type="Node" index="0"]
 
@@ -89,11 +94,28 @@ stretch_mode = 2
 
 [node name="GroundJoint" parent="." index="4" instance=ExtResource( 6 )]
 
-position = Vector2( 545.164, 986.439 )
+position = Vector2( 705.436, 1044.21 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 
 [node name="GroundJoint2" parent="." index="5" instance=ExtResource( 6 )]
 
-position = Vector2( 778.431, 991.899 )
+position = Vector2( 1082.9, 1043.94 )
+
+[node name="Area2D" type="StaticBody2D" parent="." index="6"]
+
+position = Vector2( 961.323, 1064.87 )
+input_pickable = false
+collision_layer = 3
+collision_mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+position = Vector2( -1.2605, 53.5713 )
+shape = SubResource( 1 )
 
 

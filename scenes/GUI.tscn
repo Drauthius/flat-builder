@@ -1,9 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://GUI.gd" type="Script" id=1]
 [ext_resource path="res://resources/font_theme.tres" type="Theme" id=2]
 [ext_resource path="res://fonts/MontereyFLF-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://fonts/MontereyFLF.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="GradientTexture" id=7]
+
+flags = 4
+width = 2048
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -21,7 +26,17 @@ use_filter = false
 font_data = ExtResource( 4 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="GUI" type="MarginContainer"]
+[sub_resource type="GradientTexture" id=5]
+
+flags = 4
+width = 2048
+
+[sub_resource type="GradientTexture" id=6]
+
+flags = 4
+width = 2048
+
+[node name="GUI" type="MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -58,7 +73,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Mouse" ]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" index="0"]
+[node name="TopContainer" type="HBoxContainer" parent="VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -75,7 +90,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Mouse" ]
 
-[node name="MoneySymbol" type="Label" parent="VBoxContainer/HBoxContainer" index="0"]
+[node name="MoneySymbol" type="Label" parent="VBoxContainer/TopContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -96,7 +111,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "Mouse", "Theme" ]
 
-[node name="Money" type="Label" parent="VBoxContainer/HBoxContainer" index="1"]
+[node name="Money" type="Label" parent="VBoxContainer/TopContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -109,17 +124,62 @@ rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
+size_flags_horizontal = 2
+size_flags_vertical = 1
 theme = ExtResource( 2 )
 text = "1000"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Mouse", "Theme" ]
+_sections_unfolded = [ "Mouse", "Size Flags", "Theme" ]
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" index="1"]
+[node name="MenuButton" type="TextureButton" parent="VBoxContainer/TopContainer" index="2"]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1742.0
+margin_right = 1892.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 150, 50 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = SubResource( 7 )
+expand = true
+_sections_unfolded = [ "Rect", "Size Flags", "Textures" ]
+
+[node name="Label" type="Label" parent="VBoxContainer/TopContainer/MenuButton" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Menu"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="ObjectivesContainer" type="HBoxContainer" parent="VBoxContainer" index="1"]
+
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -136,8 +196,9 @@ size_flags_vertical = 1
 alignment = 2
 _sections_unfolded = [ "Mouse" ]
 
-[node name="Background" type="ColorRect" parent="VBoxContainer/HBoxContainer2" index="0"]
+[node name="Background" type="ColorRect" parent="VBoxContainer/ObjectivesContainer" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -155,7 +216,7 @@ size_flags_vertical = 1
 color = Color( 1, 1, 1, 1 )
 _sections_unfolded = [ "Mouse", "Rect" ]
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer2/Background" index="0"]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/ObjectivesContainer/Background" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -174,7 +235,7 @@ size_flags_vertical = 1
 color = Color( 0.827451, 0.866667, 0.615686, 1 )
 _sections_unfolded = [ "Margin" ]
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2/Background/ColorRect" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -190,7 +251,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -208,7 +269,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Margin", "Rect", "Size Flags" ]
 
-[node name="ObjectivesText" type="Label" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer" index="0"]
+[node name="ObjectivesText" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -231,7 +292,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Rect", "custom_colors" ]
 
-[node name="Divider" type="ColorRect" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer" index="1"]
+[node name="Divider" type="ColorRect" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="1"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -251,7 +312,7 @@ size_flags_vertical = 1
 color = Color( 1, 1, 1, 1 )
 _sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 
-[node name="Shadow" type="ColorRect" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer/Divider" index="0"]
+[node name="Shadow" type="ColorRect" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/Divider" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -270,7 +331,7 @@ size_flags_vertical = 2
 color = Color( 0, 0, 0, 1 )
 _sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags" ]
 
-[node name="1RoomApartments" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer" index="2"]
+[node name="1RoomApartments" type="HBoxContainer" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -287,7 +348,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments" index="0"]
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -309,7 +370,7 @@ group = null
 flat = false
 align = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments" index="1"]
+[node name="Label" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -326,13 +387,13 @@ size_flags_horizontal = 2
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "1 room apartments"
+text = "1-room apartments"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Size Flags", "custom_colors", "custom_fonts" ]
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments" index="2"]
+[node name="Label2" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -356,7 +417,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Size Flags", "custom_colors", "custom_fonts" ]
 
-[node name="2RoomApartments" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer" index="3"]
+[node name="2RoomApartments" type="HBoxContainer" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -373,7 +434,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments" index="0"]
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -395,7 +456,7 @@ group = null
 flat = false
 align = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments" index="1"]
+[node name="Label" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -412,13 +473,13 @@ size_flags_horizontal = 2
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "2 room apartments"
+text = "2-room apartments"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Size Flags", "custom_colors", "custom_fonts" ]
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments" index="2"]
+[node name="Label2" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -442,7 +503,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Size Flags", "custom_colors", "custom_fonts" ]
 
-[node name="3RoomApartments" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer" index="4"]
+[node name="3RoomApartments" type="HBoxContainer" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -459,7 +520,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments" index="0"]
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -481,7 +542,7 @@ group = null
 flat = false
 align = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments" index="1"]
+[node name="Label" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -498,13 +559,13 @@ size_flags_horizontal = 2
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "3 room apartments"
+text = "3-room apartments"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Size Flags", "custom_colors", "custom_fonts" ]
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments" index="2"]
+[node name="Label2" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -527,5 +588,133 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Size Flags", "custom_colors", "custom_fonts" ]
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="VBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 578.0
+margin_right = 1892.0
+margin_bottom = 1060.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 3
+alignment = 2
+_sections_unfolded = [ "Mouse", "Size Flags" ]
+
+[node name="Buttons" type="VBoxContainer" parent="VBoxContainer/ButtonsContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1742.0
+margin_right = 1892.0
+margin_bottom = 482.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 2
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags" ]
+
+[node name="StartButton" type="TextureButton" parent="VBoxContainer/ButtonsContainer/Buttons" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 378.0
+margin_right = 150.0
+margin_bottom = 428.0
+rect_min_size = Vector2( 150, 50 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = SubResource( 5 )
+expand = true
+_sections_unfolded = [ "Rect", "Textures" ]
+
+[node name="Label" type="Label" parent="VBoxContainer/ButtonsContainer/Buttons/StartButton" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Start"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="RestartButton" type="TextureButton" parent="VBoxContainer/ButtonsContainer/Buttons" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 432.0
+margin_right = 150.0
+margin_bottom = 482.0
+rect_min_size = Vector2( 150, 50 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = SubResource( 6 )
+expand = true
+_sections_unfolded = [ "Rect", "Textures" ]
+
+[node name="Label" type="Label" parent="VBoxContainer/ButtonsContainer/Buttons/RestartButton" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 45.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Restart"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 

@@ -41,6 +41,11 @@ func _ready():
 			node.connect("clicked", self, "_on_Joint_clicked")
 	
 	$GUI.set_money(money)
+	# Connect GUI signals
+	# (Done here and not in the editor to avoid the necessary set-up for each new level/scene.)
+	$GUI/VBoxContainer/TopContainer/MenuButton.connect("button_up", self, "_on_MenuButton_up")
+	$GUI/VBoxContainer/ButtonsContainer/Buttons/StartButton.connect("button_up", self, "_on_StartButton_up")
+	$GUI/VBoxContainer/ButtonsContainer/Buttons/RestartButton.connect("button_up", self, "_on_RestartButton_up")
 
 func _process(delta):
 	if placing and current_mode == MODES.BEAM_MODE:
@@ -61,11 +66,9 @@ func _process(delta):
 	
 	if current_mode != MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_accept"):
 		current_mode = MODES.PHYSICS_MODE
-		print("PHYSICS!")
 		play()
 	elif current_mode == MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_cancel"):
 		current_mode = MODES.BEAM_MODE
-		print("no physics")
 		pause()
 	elif current_mode != MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_tab") and not placing:
 		if current_mode == MODES.BEAM_MODE:
@@ -92,6 +95,7 @@ func instanciate_apartment(type):
 
 # Start physics.
 func play():
+	print("PHYSICS!")
 	for beam in beams:
 		beam.get_node("Mid").mode = RigidBody2D.MODE_RIGID
 		beam.get_node("Left").mode = RigidBody2D.MODE_RIGID
@@ -106,6 +110,7 @@ func play():
 
 # Stop physics
 func pause():
+	print("no physics")
 	for beam in beams:
 		beam.get_node("Mid").mode = RigidBody2D.MODE_KINEMATIC
 		beam.get_node("Left").mode = RigidBody2D.MODE_KINEMATIC
@@ -295,3 +300,13 @@ func _place_apartment(position):
 	apartments.append(placing)
 	placing = null
 	from = null #just to be safe
+
+func _on_MenuButton_up():
+	print("Menu!") # TODO: Go to menu scene
+
+func _on_StartButton_up():
+	play()
+	# TODO: Set the start-button in "pressed" mode (and disable it)
+
+func _on_RestartButton_up():
+	get_tree().reload_current_scene()

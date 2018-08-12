@@ -1,7 +1,7 @@
 extends MarginContainer
 
-onready var money_symbol = $VBoxContainer/HBoxContainer/MoneySymbol
-onready var money_label = $VBoxContainer/HBoxContainer/Money
+onready var money_symbol = $VBoxContainer/TopContainer/MoneySymbol
+onready var money_label = $VBoxContainer/TopContainer/Money
 
 func set_money(amount):
 	money_label.text = str(amount)

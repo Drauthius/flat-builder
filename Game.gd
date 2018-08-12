@@ -41,7 +41,7 @@ func _ready():
 func _process(delta):
 	if placing and current_mode == MODES.BEAM_MODE:
 		_update_placing_beam()
-	if placing and current_mode == MODES.BEAM_MODE:
+	if placing and current_mode == MODES.APARTMENT_MODE:
 		_update_placing_apartment()
 		pass
 	
@@ -59,19 +59,19 @@ func _process(delta):
 		elif current_mode == MODES.APARTMENT_MODE:
 			current_mode = MODES.BEAM_MODE
 		print("current_mode ", current_mode)
-	elif current_mode == MODES.APARTMENT_MODE and Input.is_key_pressed(KEY_1):
-		if placing != apartments[0]:
-			placing = apartments[0].instance()
-			add_child(placing)
-			placing.set_position(get_viewport().get_mouse_position())
-	elif current_mode == MODES.APARTMENT_MODE and Input.is_key_pressed(KEY_2):
-		if placing != apartments[1]:
-			placing = apartments[1].instance()
-			add_child(placing)
-			placing.set_position(get_viewport().get_mouse_position())
+	elif not placing and current_mode == MODES.APARTMENT_MODE and Input.is_key_pressed(KEY_1):
+		instanciate_apartment(0)
+	elif not placing and current_mode == MODES.APARTMENT_MODE and Input.is_key_pressed(KEY_2):
+		instanciate_apartment(1)
 	else:
 #		print("unhandled stuff")
 		pass
+
+func instanciate_apartment( array_index ):
+	if placing != apartments[array_index]:
+		placing = apartments[array_index].instance()
+		add_child(placing)
+		placing.set_position(get_viewport().get_mouse_position())
 
 # Start physics.
 func play():
@@ -101,10 +101,9 @@ func _update_placing_beam(position = null):
 	var diff = position - from.position
 	placing.get_node("Sprite").rect_size.x = diff.length()
 
-# What is this thing doing here? //Ulf
-func _update_placing_apartment(position = null):
-	if not position:
-		position = get_viewport().get_mouse_position()
+# Just changing the position of the apartment to be placed
+func _update_placing_apartment():
+	placing.set_position(get_viewport().get_mouse_position())
 
 # Called when clicked on things that aren't a joint.
 # This function recieves the input event before the joint for some reason (when placing), so just handle it here I guess.
@@ -130,29 +129,19 @@ func _unhandled_input(event):
 		_place_beam(event.position)
 	#handling apartments
 	elif current_mode == MODES.APARTMENT_MODE and event is InputEventMouseButton and event.button_index == BUTTON_LEFT and not event.pressed:
+			
+		# Update the placing node, so that _place_beam puts the end at the right place.
+		_update_placing_apartment()
 		if placing:
 			print("apartment input")
 			get_tree().set_input_as_handled() # Marked as handled.
 		# Create a shape + transform for checking if a click connects to an existing joint.
-#			var shape = CircleShape2D.new()
-#			shape.radius = 10
-#			var transform = Transform2D(0.0, event.position)
-#
-#			for joint in joints:
-#				if joint.get_node("CollisionShape2D").shape.collide(joint.get_global_transform(), shape, transform):
-#					var position = joint.get_global_transform().origin
-#
-#					# Update the placing node, so that _place_beam puts the end at the right place.
-#					_update_placing_beam(position)
-#
-#					_place_beam(position, joint)
-#					return
-#
-#			_place_beam(event.position)
-
-		else:
-			pass
-		pass
+			var transform = Transform2D(0.0, event.position)
+			var connecting_joints = []
+			_place_apartment(event.position)
+			#conditional stuff for when to place an apartment?
+			if false:
+				pass
 
 # Called when a joint (ground or from a beam) is clicked.
 func _on_Joint_clicked(joint):
@@ -247,3 +236,29 @@ func _place_beam(position, other_joint = null):
 	placing.queue_free()
 	placing = null
 	from = null
+
+func _place_apartment(position):
+	placing.set_position(position)
+	apartments.append(placing)
+	placing = null
+	from = null #just to be safe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

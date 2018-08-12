@@ -4,9 +4,6 @@
 [ext_resource path="res://Joint.gd" type="Script" id=2]
 [ext_resource path="res://sprites/joint.png" type="Texture" id=3]
 
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
@@ -28,6 +25,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Mid" type="RigidBody2D" parent="." index="0"]
 
+editor/display_folded = true
 position = Vector2( 30, 0 )
 input_pickable = false
 collision_layer = 1
@@ -80,6 +78,7 @@ _sections_unfolded = [ "Pause", "Z Index" ]
 
 [node name="Left" type="RigidBody2D" parent="." index="1"]
 
+editor/display_folded = true
 z_index = 20
 input_pickable = true
 collision_layer = 2
@@ -121,6 +120,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Right" type="RigidBody2D" parent="." index="2"]
 
+editor/display_folded = true
 position = Vector2( 60, 0 )
 z_index = 20
 input_pickable = true

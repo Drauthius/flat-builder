@@ -6,12 +6,12 @@
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 9.8012
+radius = 8.0
 
 [node name="GroundJoint" type="RigidBody2D"]
 
 input_pickable = true
-collision_layer = 1
+collision_layer = 2
 collision_mask = 1
 mode = 1
 mass = 1.0
@@ -29,7 +29,7 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Pickable" ]
+_sections_unfolded = [ "Collision", "Pickable" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -38,7 +38,6 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
 shape = SubResource( 1 )
-disabled = true
 
 [connection signal="input_event" from="." to="." method="_on_Joint_input_event"]
 

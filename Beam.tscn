@@ -4,7 +4,7 @@
 [ext_resource path="res://Joint.gd" type="Script" id=2]
 [ext_resource path="res://joint.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 24, 4 )
@@ -12,7 +12,7 @@ extents = Vector2( 24, 4 )
 [sub_resource type="CircleShape2D" id=2]
 
 custom_solver_bias = 0.0
-radius = 10.0851
+radius = 8.0
 
 [node name="Beam" type="Node2D" index="0"]
 
@@ -23,7 +23,7 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 30, 0 )
 input_pickable = false
 collision_layer = 1
-collision_mask = 1
+collision_mask = 2
 mode = 3
 mass = 1.0
 friction = 1.0
@@ -36,7 +36,7 @@ contact_monitor = false
 sleeping = false
 can_sleep = true
 linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
+linear_damp = 5.0
 angular_velocity = 0.0
 angular_damp = -1.0
 _sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear" ]
@@ -62,21 +62,22 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 texture = ExtResource( 1 )
 expand = true
+stretch_mode = 0
 _sections_unfolded = [ "Anchor", "Margin", "Mouse", "Rect" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mid" index="1"]
 
-shape = SubResource( 3 )
-_sections_unfolded = [ "Z Index" ]
+shape = SubResource( 1 )
+_sections_unfolded = [ "Pause", "Z Index" ]
 
 [node name="Left" type="RigidBody2D" parent="." index="1"]
 
 z_index = 20
 input_pickable = true
-collision_layer = 1
+collision_layer = 2
 collision_mask = 1
 mode = 3
-mass = 1.0
+mass = 0.1
 friction = 1.0
 bounce = 0.0
 gravity_scale = 1.0
@@ -87,11 +88,11 @@ contact_monitor = false
 sleeping = false
 can_sleep = true
 linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
+linear_damp = 5.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 2 )
-_sections_unfolded = [ "Pickable", "Transform", "Z Index" ]
+_sections_unfolded = [ "Collision", "Linear", "Pickable", "Transform", "Z Index" ]
 __meta__ = {
 "_edit_group_": true
 }
@@ -99,7 +100,6 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left" index="0"]
 
 shape = SubResource( 2 )
-disabled = true
 
 [node name="Sprite" type="Sprite" parent="Left/CollisionShape2D" index="0"]
 
@@ -110,10 +110,10 @@ texture = ExtResource( 3 )
 position = Vector2( 60, 0 )
 z_index = 20
 input_pickable = true
-collision_layer = 1
+collision_layer = 2
 collision_mask = 1
 mode = 3
-mass = 1.0
+mass = 0.1
 friction = 1.0
 bounce = 0.0
 gravity_scale = 1.0
@@ -124,11 +124,11 @@ contact_monitor = false
 sleeping = false
 can_sleep = true
 linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
+linear_damp = 5.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 2 )
-_sections_unfolded = [ "Pickable", "Transform", "Z Index" ]
+_sections_unfolded = [ "Collision", "Linear", "Pickable", "Transform", "Z Index" ]
 __meta__ = {
 "_edit_group_": true
 }
@@ -136,7 +136,6 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right" index="0"]
 
 shape = SubResource( 2 )
-disabled = true
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="Right/CollisionShape2D" index="0"]

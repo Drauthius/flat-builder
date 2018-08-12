@@ -20,6 +20,7 @@ var cost_text = null
 
 var beams = []
 var joints = []
+var breakable_joints = []
 var apartments = []
 var current_mode
 
@@ -46,6 +47,19 @@ func _process(delta):
 		_update_placing_beam()
 	if placing and current_mode == MODES.APARTMENT_MODE:
 		_update_placing_apartment()
+	
+	var joints_to_be_removed = []
+	var index = 0
+	for joint in breakable_joints:
+		var r1 = get_node(joint.node_a).get_global_transform().origin
+		var r2 = get_node(joint.node_b).get_global_transform().origin
+		var diff = (r1 - r2).length()
+		if diff > 1.0:
+			joints_to_be_removed.append(index)
+		index = index + 1
+	for index in joints_to_be_removed:
+		breakable_joints[index].queue_free()
+		breakable_joints.remove(index)
 	
 	if current_mode != MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_accept"):
 		current_mode = MODES.PHYSICS_MODE
@@ -257,6 +271,7 @@ func _place_beam(position, other_joint = null):
 		joint.position = left_joint.position
 		joint.node_a = from.joint.get_path()
 		joint.node_b = beam.get_node("Left").get_path()
+		breakable_joints.append(joint)
 		
 		# Add a pin joint for the right joint if it is connected to anything.
 		if other_joint:
@@ -266,6 +281,7 @@ func _place_beam(position, other_joint = null):
 			joint.position = right_joint.position
 			joint.node_a = other_joint.get_path()
 			joint.node_b = beam.get_node("Right").get_path()
+			breakable_joints.append(joint)
 
 	# Clear the placing stuff.
 	placing.queue_free()

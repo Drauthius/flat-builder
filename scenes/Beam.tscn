@@ -25,7 +25,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Mid" type="RigidBody2D" parent="." index="0"]
 
-editor/display_folded = true
 position = Vector2( 30, 0 )
 input_pickable = false
 collision_layer = 1
@@ -78,7 +77,6 @@ _sections_unfolded = [ "Pause", "Z Index" ]
 
 [node name="Left" type="RigidBody2D" parent="." index="1"]
 
-editor/display_folded = true
 z_index = 20
 input_pickable = true
 collision_layer = 2
@@ -120,7 +118,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Right" type="RigidBody2D" parent="." index="2"]
 
-editor/display_folded = true
 position = Vector2( 60, 0 )
 z_index = 20
 input_pickable = true
@@ -161,6 +158,7 @@ _sections_unfolded = [ "Transform" ]
 
 shape = SubResource( 3 )
 disabled = true
+_sections_unfolded = [ "Transform" ]
 
 [connection signal="input_event" from="Left" to="Left" method="_on_Joint_input_event"]
 

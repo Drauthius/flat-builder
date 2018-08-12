@@ -2,13 +2,20 @@ extends Node
 
 var Beam = preload("res://scenes/Beam.tscn")
 var BeamSprite = preload("res://scenes/BeamSprite.tscn")
+var CostText = preload("res://scenes/CostText.tscn")
 var Apartment1x1 = preload("res://scenes/Apartment1x1.tscn")
 var Apartment2x1 = preload("res://scenes/Apartment2x1.tscn")
 
 export(int, 1000000) var money
+var min_beam_length = 16
+var max_beam_length = 128
+var min_beam_cost = 25
+var max_beam_cost = 100
 
 var from = null
 var placing = null
+var cost_text = null
+
 var beams = []
 var joints = []
 var apartments = [
@@ -17,14 +24,11 @@ var apartments = [
 ]
 var current_mode
 
-enum MODES{
+enum MODES {
 	BEAM_MODE,
 	APARTMENT_MODE,
 	PHYSICS_MODE
 }
-
-#enum 
-
 
 func _ready():
 	current_mode = MODES.BEAM_MODE
@@ -94,12 +98,22 @@ func pause():
 		beam.get_node("Right").set_sleeping(true)
 
 # Stretch and rotate the beam sprite that is currently being placed.
-func _update_placing_beam(position = null):
+# Force will ignore (or exagerate) the maximum beam length, to avoid connections that are juuuust short.
+func _update_placing_beam(position = null, force = false):
 	if not position:
 		position = get_viewport().get_mouse_position()
 	placing.look_at(position)
-	var diff = position - from.position
-	placing.get_node("Sprite").rect_size.x = diff.length()
+	var length = min(max_beam_length if not force else max_beam_length * 100, (position - from.position).length())
+	placing.get_node("Sprite").rect_size.x = length
+	
+	var cost = 0
+	if length >= min_beam_length:
+		cost = (length - min_beam_length) / (max_beam_length - min_beam_length) * (max_beam_cost - min_beam_cost) + min_beam_cost
+	
+	cost_text.set_cost(round(cost), cost > money)
+	$GUI.set_insufficient(cost > money)
+	
+	return placing.to_global(Vector2(length, 0))
 
 # Just changing the position of the apartment to be placed
 func _update_placing_apartment():
@@ -114,19 +128,24 @@ func _unhandled_input(event):
 	if current_mode == MODES.BEAM_MODE and event is InputEventMouseButton and placing and event.button_index == BUTTON_LEFT and not event.pressed:
 		#print("unhandled input")
 		get_tree().set_input_as_handled() # Marked as handled.
+		
+		# Get the position of the beam's end.
+		var position = _update_placing_beam(event.position)
+		
 		# Create a shape + transform for checking if a click connects to an existing joint.
 		var shape = CircleShape2D.new()
 		shape.radius = 10
-		var transform = Transform2D(0.0, event.position)
+		var transform = Transform2D(0.0, position)
+		
 		for joint in joints:
 			if joint.get_node("CollisionShape2D").shape.collide(joint.get_global_transform(), shape, transform):
-				var position = joint.get_global_transform().origin
 				# Update the placing node, so that _place_beam puts the end at the right place.
-				_update_placing_beam(position)
+				position = _update_placing_beam(joint.get_global_transform().origin, true)
+				
 				_place_beam(position, joint)
 				return
 				
-		_place_beam(event.position)
+		_place_beam(position)
 	#handling apartments
 	elif current_mode == MODES.APARTMENT_MODE and event is InputEventMouseButton and event.button_index == BUTTON_LEFT and not event.pressed:
 			
@@ -155,7 +174,10 @@ func _on_Joint_clicked(joint):
 		from = { "joint": joint, "position": position }
 		placing = BeamSprite.instance()
 		add_child(placing)
-		placing.set_position(from.position)
+		placing.position = from.position
+		cost_text = CostText.instance()
+		add_child(cost_text)
+		cost_text.position = from.position - Vector2(20, 40)
 	#else:
 		# The above _unhandled_event gets the event before the click event on the joint.
 
@@ -166,7 +188,11 @@ func _place_beam(position, other_joint = null):
 	var slackness = 0.5
 	
 	# Minimum length requirement for placing beam.
-	if placing.get_node("Sprite").rect_size.x >= 16:
+	if placing.get_node("Sprite").rect_size.x >= min_beam_length and cost_text.cost <= money:
+		# Reduce the amount of money
+		money -= cost_text.cost
+		$GUI.set_money(money)
+		
 		# Create a new beam
 		var beam = Beam.instance()
 		beam.set_position(placing.get_position())
@@ -236,29 +262,13 @@ func _place_beam(position, other_joint = null):
 	placing.queue_free()
 	placing = null
 	from = null
+	cost_text.queue_free()
+	cost_text = null
+	# Reset GUI
+	$GUI.set_insufficient(false)
 
 func _place_apartment(position):
 	placing.set_position(position)
 	apartments.append(placing)
 	placing = null
 	from = null #just to be safe
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

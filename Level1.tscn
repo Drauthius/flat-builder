@@ -13,10 +13,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 87.0
-margin_top = 373.0
-margin_right = 873.0
-margin_bottom = 473.0
+margin_left = 512.0
+margin_top = 625.0
+margin_right = 1298.0
+margin_bottom = 725.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -28,10 +28,18 @@ _sections_unfolded = [ "Mouse" ]
 
 [node name="GroundJoint" parent="." index="1" instance=ExtResource( 2 )]
 
-position = Vector2( 285.503, 373.738 )
+position = Vector2( 710.799, 625.765 )
 z_index = 20
-_sections_unfolded = [ "Material", "Pickable", "Visibility", "Z Index" ]
+_sections_unfolded = [ "Collision", "Material", "Pickable", "Visibility", "Z Index" ]
+
+[node name="GroundJoint2" parent="." index="2" instance=ExtResource( 2 )]
+
+position = Vector2( 1090.62, 624.908 )
+z_index = 20
+_sections_unfolded = [ "Collision", "Material", "Pickable", "Visibility", "Z Index" ]
 
 [connection signal="clicked" from="GroundJoint" to="." method="_on_Joint_clicked"]
+
+[connection signal="clicked" from="GroundJoint2" to="." method="_on_Joint_clicked"]
 
 

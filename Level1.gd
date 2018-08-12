@@ -12,6 +12,7 @@ var joints = []
 
 func _ready():
 	joints.append($GroundJoint)
+	joints.append($GroundJoint2)
 
 func _process(delta):
 	if placing:
@@ -49,7 +50,7 @@ func _unhandled_input(event):
 		
 		# This function recieves the input event before the joint for some reason, so just handle it here I guess.
 		var shape = CircleShape2D.new()
-		shape.radius = 5
+		shape.radius = 10
 		var transform = Transform2D(0.0, event.position)
 		for joint in joints:
 			if joint.get_node("CollisionShape2D").shape.collide(joint.get_global_transform(), shape, transform):
@@ -89,6 +90,8 @@ func _on_Joint_clicked(joint):
 #		#_place_beam(position)
 
 func _place_beam(position, other_joint = null):
+	var slackness = 1
+	
 	if placing.get_node("Sprite").rect_size.x > 16:
 		var beam = Beam.instance()
 		beam.set_position(placing.get_position())
@@ -103,6 +106,7 @@ func _place_beam(position, other_joint = null):
 		# once the mode is changed to rigid.
 		yield(get_tree(), "idle_frame")
 		var meh1 = PinJoint2D.new()
+		meh1.softness = slackness
 		meh1.position = beam.get_node("Left").position - Vector2(30, 0)
 		#meh.position = Vector2(-30, 0)
 		meh1.node_a = beam.get_node("Mid").get_path()
@@ -110,6 +114,7 @@ func _place_beam(position, other_joint = null):
 		beam.get_node("Mid").add_child(meh1)
 		
 		var meh2 = PinJoint2D.new()
+		meh2.softness = slackness
 		meh2.position = beam.get_node("Right").position - Vector2(30, 0)
 		#meh.position = Vector2(-30, 0)
 		meh2.node_a = beam.get_node("Mid").get_path()
@@ -130,10 +135,14 @@ func _place_beam(position, other_joint = null):
 		joints.append(beam.get_node("Left"))
 		joints.append(beam.get_node("Right"))
 		
+		beam.get_node("Mid").mass = length / 320.0
+		print("New mass ", beam.get_node("Mid").mass)
+		
 		# Have to yield here, or the thing goes haywire once the body is set to
 		# rigid.
 		yield(get_tree(), "idle_frame")
 		var joint = PinJoint2D.new()
+		joint.softness = slackness
 		#joint.position = from.position
 		joint.position = meh1.position
 		#joint.position = beam.get_node("Mid").get_transform().xform_inv(from.position)
@@ -160,6 +169,7 @@ func _place_beam(position, other_joint = null):
 
 		if other_joint:
 			joint = PinJoint2D.new()
+			joint.softness = slackness
 			joint.position = meh2.position
 			#joint.position = other_joint.get_global_transform().origin
 			#joint.position = beam.get_transform().xform_inv(other_joint.get_global_transform().origin)

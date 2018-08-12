@@ -1,10 +1,12 @@
 extends Node
 
+var Apartment1x1 = preload("res://scenes/Apartment1x1.tscn")
+var Apartment2x1 = preload("res://scenes/Apartment2x1.tscn")
+var Apartment1x2 = preload("res://scenes/Apartment1x2.tscn")
+var Apartment2x2 = preload("res://scenes/Apartment2x2.tscn")
 var Beam = preload("res://scenes/Beam.tscn")
 var BeamSprite = preload("res://scenes/BeamSprite.tscn")
 var CostText = preload("res://scenes/CostText.tscn")
-var Apartment1x1 = preload("res://scenes/Apartment1x1.tscn")
-var Apartment2x1 = preload("res://scenes/Apartment2x1.tscn")
 
 export(int, 1000000) var money
 var min_beam_length = 16
@@ -18,10 +20,7 @@ var cost_text = null
 
 var beams = []
 var joints = []
-var apartments = [
-	Apartment1x1,
-	Apartment2x1
-]
+var apartments = []
 var current_mode
 
 enum MODES {
@@ -47,7 +46,6 @@ func _process(delta):
 		_update_placing_beam()
 	if placing and current_mode == MODES.APARTMENT_MODE:
 		_update_placing_apartment()
-		pass
 	
 	if current_mode != MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_accept"):
 		current_mode = MODES.PHYSICS_MODE
@@ -64,18 +62,21 @@ func _process(delta):
 			current_mode = MODES.BEAM_MODE
 		print("current_mode ", current_mode)
 	elif not placing and current_mode == MODES.APARTMENT_MODE and Input.is_key_pressed(KEY_1):
-		instanciate_apartment(0)
+		instanciate_apartment(Apartment1x1)
 	elif not placing and current_mode == MODES.APARTMENT_MODE and Input.is_key_pressed(KEY_2):
-		instanciate_apartment(1)
+		instanciate_apartment(Apartment2x1)
+	elif not placing and current_mode == MODES.APARTMENT_MODE and Input.is_key_pressed(KEY_3):
+		instanciate_apartment(Apartment1x2)
+	elif not placing and current_mode == MODES.APARTMENT_MODE and Input.is_key_pressed(KEY_4):
+		instanciate_apartment(Apartment2x2)
 	else:
 #		print("unhandled stuff")
 		pass
 
-func instanciate_apartment( array_index ):
-	if placing != apartments[array_index]:
-		placing = apartments[array_index].instance()
-		add_child(placing)
-		placing.set_position(get_viewport().get_mouse_position())
+func instanciate_apartment(type):
+	placing = type.instance()
+	add_child(placing)
+	placing.set_position(get_viewport().get_mouse_position())
 
 # Start physics.
 func play():
@@ -86,16 +87,24 @@ func play():
 		beam.get_node("Mid").set_sleeping(false)
 		beam.get_node("Left").set_sleeping(false)
 		beam.get_node("Right").set_sleeping(false)
+	
+	for apartment in apartments:
+		apartment.mode = RigidBody2D.MODE_RIGID
+		apartment.set_sleeping(false)
 
 # Stop physics
 func pause():
 	for beam in beams:
-		beam.get_node("Mid").mode = RigidBody2D.MODE_STATIC
-		beam.get_node("Left").mode = RigidBody2D.MODE_STATIC
-		beam.get_node("Right").mode = RigidBody2D.MODE_STATIC
+		beam.get_node("Mid").mode = RigidBody2D.MODE_KINEMATIC
+		beam.get_node("Left").mode = RigidBody2D.MODE_KINEMATIC
+		beam.get_node("Right").mode = RigidBody2D.MODE_KINEMATIC
 		beam.get_node("Mid").set_sleeping(true)
 		beam.get_node("Left").set_sleeping(true)
 		beam.get_node("Right").set_sleeping(true)
+	
+	for apartment in apartments:
+		apartment.mode = RigidBody2D.MODE_KINEMATIC
+		apartment.set_sleeping(true)
 
 # Stretch and rotate the beam sprite that is currently being placed.
 # Force will ignore (or exagerate) the maximum beam length, to avoid connections that are juuuust short.
@@ -164,7 +173,7 @@ func _unhandled_input(event):
 
 # Called when a joint (ground or from a beam) is clicked.
 func _on_Joint_clicked(joint):
-	if current_mode == MODES.PHYSICS_MODE:
+	if current_mode != MODES.BEAM_MODE:
 		return
 	
 	var position = joint.get_global_transform().origin

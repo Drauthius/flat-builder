@@ -3,6 +3,8 @@ extends Node
 var Beam = preload("res://scenes/Beam.tscn")
 var BeamSprite = preload("res://scenes/BeamSprite.tscn")
 
+export(int, 1000000) var money
+
 var from = null
 var placing = null
 var playing = false
@@ -16,6 +18,8 @@ func _ready():
 			joints.append(node)
 			# Connect the click event for the joint
 			node.connect("clicked", self, "_on_Joint_clicked")
+	
+	$GUI.set_money(money)
 
 func _process(delta):
 	if placing:

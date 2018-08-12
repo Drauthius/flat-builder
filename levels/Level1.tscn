@@ -16,6 +16,7 @@ extents = Vector2( 924.544, 66.0884 )
 [node name="Level1" type="Node"]
 
 script = ExtResource( 1 )
+money = 10000
 
 [node name="Sky" type="TextureRect" parent="." index="0"]
 

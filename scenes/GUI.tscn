@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://resources/font_theme.tres" type="Theme" id=1]
+[ext_resource path="res://GUI.gd" type="Script" id=1]
+[ext_resource path="res://resources/font_theme.tres" type="Theme" id=2]
 
 [node name="GUI" type="MarginContainer" index="0"]
 
@@ -14,11 +15,12 @@ margin_right = -10.0
 margin_bottom = -10.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-_sections_unfolded = [ "Margin" ]
+script = ExtResource( 1 )
+_sections_unfolded = [ "Margin", "Mouse" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." index="0"]
 
@@ -31,11 +33,12 @@ margin_right = 1900.0
 margin_bottom = 1060.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 1
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
+_sections_unfolded = [ "Mouse" ]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" index="0"]
 
@@ -44,15 +47,15 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1892.0
-margin_bottom = 69.0
+margin_bottom = 70.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 1
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
-_sections_unfolded = [ "Grow Direction", "Margin", "Rect" ]
+_sections_unfolded = [ "Grow Direction", "Margin", "Mouse", "Rect" ]
 
 [node name="MoneySymbol" type="Label" parent="VBoxContainer/HBoxContainer" index="0"]
 
@@ -60,20 +63,20 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 29.0
-margin_bottom = 69.0
+margin_right = 40.0
+margin_bottom = 70.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-theme = ExtResource( 1 )
+theme = ExtResource( 2 )
 text = "$"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "BBCode", "Theme" ]
+_sections_unfolded = [ "BBCode", "Mouse", "Theme" ]
 
 [node name="Money" type="Label" parent="VBoxContainer/HBoxContainer" index="1"]
 
@@ -81,20 +84,20 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 33.0
-margin_right = 174.0
-margin_bottom = 69.0
+margin_left = 44.0
+margin_right = 200.0
+margin_bottom = 70.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-theme = ExtResource( 1 )
+theme = ExtResource( 2 )
 text = "1000"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Theme" ]
+_sections_unfolded = [ "Mouse", "Theme" ]
 
 

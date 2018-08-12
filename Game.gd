@@ -122,10 +122,11 @@ func _update_placing_apartment():
 # Called when clicked on things that aren't a joint.
 # This function recieves the input event before the joint for some reason (when placing), so just handle it here I guess.
 func _unhandled_input(event):
-	if current_mode == MODES.PHYSICS_MODE:
+	if current_mode == MODES.PHYSICS_MODE or not placing or not event is InputEventMouseButton or not event.button_index == BUTTON_LEFT or event.pressed:
 		return
+		
 	#handling beams
-	if current_mode == MODES.BEAM_MODE and event is InputEventMouseButton and placing and event.button_index == BUTTON_LEFT and not event.pressed:
+	if current_mode == MODES.BEAM_MODE:
 		#print("unhandled input")
 		get_tree().set_input_as_handled() # Marked as handled.
 		
@@ -147,8 +148,7 @@ func _unhandled_input(event):
 				
 		_place_beam(position)
 	#handling apartments
-	elif current_mode == MODES.APARTMENT_MODE and event is InputEventMouseButton and event.button_index == BUTTON_LEFT and not event.pressed:
-			
+	elif current_mode == MODES.APARTMENT_MODE:
 		# Update the placing node, so that _place_beam puts the end at the right place.
 		_update_placing_apartment()
 		if placing:

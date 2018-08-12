@@ -40,6 +40,10 @@ func _process(delta):
 		current_mode = MODES.PHYSICS_MODE
 		print("PHYSICS!")
 		play()
+	elif current_mode == MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_cancel"):
+		current_mode = MODES.BEAM_MODE
+		print("no physics")
+		pause()
 
 # Start physics.
 func play():
@@ -51,6 +55,17 @@ func play():
 		beam.get_node("Mid").set_sleeping(false)
 		beam.get_node("Left").set_sleeping(false)
 		beam.get_node("Right").set_sleeping(false)
+
+# Stop physics
+func pause():
+	
+	for beam in beams:
+		beam.get_node("Mid").mode = RigidBody2D.MODE_STATIC
+		beam.get_node("Left").mode = RigidBody2D.MODE_STATIC
+		beam.get_node("Right").mode = RigidBody2D.MODE_STATIC
+		beam.get_node("Mid").set_sleeping(true)
+		beam.get_node("Left").set_sleeping(true)
+		beam.get_node("Right").set_sleeping(true)
 
 # Stretch and rotate the beam sprite that is currently being placed.
 func _update_placing_beam(position = null):

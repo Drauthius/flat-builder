@@ -10,8 +10,19 @@ var placing = null
 var playing = false
 var beams = []
 var joints = []
+var apartments = []
+var current_mode
+
+enum MODES{
+	BEAM_MODE,
+	APARTMENT_MODE,
+	PHYSICS_MODE
+}
+
 
 func _ready():
+	current_mode = MODES.BEAM_MODE
+	
 	# Add the ground joints that are available in the level (identified as RigidBody2D).
 	for node in get_children():
 		if node is RigidBody2D:
@@ -25,13 +36,13 @@ func _process(delta):
 	if placing:
 		_update_placing_beam()
 	
-	if not playing and Input.is_action_just_pressed("ui_accept"):
+	if current_mode != MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_accept"):
+		current_mode = MODES.PHYSICS_MODE
 		print("PHYSICS!")
 		play()
 
 # Start physics.
 func play():
-	playing = true
 	
 	for beam in beams:
 		beam.get_node("Mid").mode = RigidBody2D.MODE_RIGID
@@ -53,7 +64,7 @@ func _update_placing_beam(position = null):
 # Called when clicked on things that aren't a joint.
 # This function recieves the input event before the joint for some reason (when placing), so just handle it here I guess.
 func _unhandled_input(event):
-	if playing:
+	if current_mode == MODES.PHYSICS_MODE:
 		return
 		
 	if event is InputEventMouseButton and placing and event.button_index == BUTTON_LEFT and not event.pressed:
@@ -76,10 +87,11 @@ func _unhandled_input(event):
 				return
 				
 		_place_beam(event.position)
+#	elif event is InputEventKey and event.
 
 # Called when a joint (ground or from a beam) is clicked.
 func _on_Joint_clicked(joint):
-	if playing:
+	if current_mode == MODES.PHYSICS_MODE:
 		return
 	
 	var position = joint.get_global_transform().origin

@@ -1,9 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Level1.gd" type="Script" id=1]
-[ext_resource path="res://GroundJoint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game.gd" type="Script" id=1]
+[ext_resource path="res://scenes/GroundJoint.tscn" type="PackedScene" id=2]
 
-[node name="Level1" type="Node"]
+
+
+[node name="TestLevel" type="Node" index="0"]
 
 script = ExtResource( 1 )
 

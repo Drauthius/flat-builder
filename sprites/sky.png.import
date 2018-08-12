@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sky.png-26d2f2385da36d2602e95bc19d12fcc5.stex"
+path="res://.import/sky.png-8fa0f55909e672d3ba612a05ac524628.stex"
 
 [deps]
 
-source_file="res://sky.png"
-dest_files=[ "res://.import/sky.png-26d2f2385da36d2602e95bc19d12fcc5.stex" ]
+source_file="res://sprites/sky.png"
+dest_files=[ "res://.import/sky.png-8fa0f55909e672d3ba612a05ac524628.stex" ]
 
 [params]
 

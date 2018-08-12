@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pierrebeam.png-5417f9df47dca0af73a2105299126d42.stex"
+path="res://.import/grass-r.png-6432cd38977d6f4a3b7dfc50c949bfc6.stex"
 
 [deps]
 
-source_file="res://pierrebeam.png"
-dest_files=[ "res://.import/pierrebeam.png-5417f9df47dca0af73a2105299126d42.stex" ]
+source_file="res://sprites/grass-r.png"
+dest_files=[ "res://.import/grass-r.png-6432cd38977d6f4a3b7dfc50c949bfc6.stex" ]
 
 [params]
 

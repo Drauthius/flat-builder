@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/menu_click_cancel.wav-c911a6795ba4bcc03135ae446fb797fa.sample"
+
+[deps]
+
+source_file="res://music/menu_click_cancel.wav"
+dest_files=[ "res://.import/menu_click_cancel.wav-c911a6795ba4bcc03135ae446fb797fa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

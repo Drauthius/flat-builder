@@ -13,7 +13,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 924.544, 66.0884 )
 
-[node name="Level1" type="Node"]
+[node name="Level1" type="Node" index="0"]
 
 script = ExtResource( 1 )
 money = 5000
@@ -97,7 +97,7 @@ stretch_mode = 2
 [node name="GroundJoint" parent="." index="4" instance=ExtResource( 6 )]
 
 position = Vector2( 705.436, 1044.21 )
-_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility" ]
 
 [node name="GroundJoint2" parent="." index="5" instance=ExtResource( 6 )]
 

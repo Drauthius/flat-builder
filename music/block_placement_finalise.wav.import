@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/block_placement_finalise.wav-ce2b8f967c24ec993013632f09ed1fe0.sample"
+
+[deps]
+
+source_file="res://music/block_placement_finalise.wav"
+dest_files=[ "res://.import/block_placement_finalise.wav-ce2b8f967c24ec993013632f09ed1fe0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

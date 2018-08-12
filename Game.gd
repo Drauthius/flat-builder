@@ -48,6 +48,7 @@ func _ready():
 	$GUI/VBoxContainer/ButtonsContainer/Buttons/RestartButton.connect("button_up", self, "_on_RestartButton_up")
 
 func _process(delta):
+	var max_joint_separation = 1.0
 	if placing and current_mode == MODES.BEAM_MODE:
 		_update_placing_beam()
 	if placing and current_mode == MODES.APARTMENT_MODE:
@@ -58,7 +59,16 @@ func _process(delta):
 		var r1 = get_node(joint.node_a).get_global_transform().origin
 		var r2 = get_node(joint.node_b).get_global_transform().origin
 		var diff = (r1 - r2).length()
-		if diff > 0.5:
+		if diff > max_joint_separation/2.0:
+			var x = -1.0  + diff*2.0/max_joint_separation
+#			var y = lerp(max_joint_separation/2.0, max_joint_separation, x)
+			get_node(joint.node_a).modulate = Color(1.0, 1.0-x, 1.0-x)
+			get_node(joint.node_b).modulate = Color(1.0, 1.0-x, 1.0-x)
+#			print(get_node(joint.node_a).modulate)
+		else:
+			get_node(joint.node_a).modulate = Color(1.0, 1.0, 1.0)
+			get_node(joint.node_b).modulate = Color(1.0, 1.0, 1.0)
+		if diff > max_joint_separation:
 			joints_to_be_removed.append(joint)
 	for joint in joints_to_be_removed:
 		breakable_joints.erase(joint)

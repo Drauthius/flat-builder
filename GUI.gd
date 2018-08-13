@@ -61,9 +61,9 @@ func set_objective(apt_1, apt_2, apt_3):
 	apt_goal[2] = apt_2
 	apt_goal[3] = apt_3
 	
-	for i in range(1, 3):
+	for i in range(1, 4):
 		if apt_goal[i] <= 0:
-			apt_checkboxes[i].checked = true
+			apt_checkboxes[i].pressed = true
 
 func set_maximum(apt_1, apt_2, apt_3):
 	pass

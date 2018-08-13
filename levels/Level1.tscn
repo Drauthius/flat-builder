@@ -17,13 +17,13 @@ extents = Vector2( 924.544, 66.0884 )
 [node name="Level1" type="Node"]
 
 script = ExtResource( 1 )
-money = 5000
-apartment_goal_1 = 4
-apartment_goal_2 = 4
-apartment_goal_3 = 4
-apartment_max_1 = 6
-apartment_max_2 = 6
-apartment_max_3 = 6
+money = 1500
+apartment_goal_1 = 2
+apartment_goal_2 = 0
+apartment_goal_3 = 0
+apartment_max_1 = 2
+apartment_max_2 = 0
+apartment_max_3 = 0
 
 [node name="Sky" type="TextureRect" parent="." index="0"]
 

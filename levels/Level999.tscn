@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://sprites/landscape.png" type="Texture" id=2]
-[ext_resource path="res://sprites/grass.png" type="Texture" id=3]
-[ext_resource path="res://sprites/grass-l.png" type="Texture" id=4]
-[ext_resource path="res://sprites/grass-r.png" type="Texture" id=5]
-[ext_resource path="res://scenes/GroundJoint.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sprites/grass.png" type="Texture" id=4]
+[ext_resource path="res://sprites/grass-l.png" type="Texture" id=5]
+[ext_resource path="res://sprites/grass-r.png" type="Texture" id=6]
+[ext_resource path="res://scenes/GroundJoint.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -16,6 +17,12 @@ extents = Vector2( 72, 40 )
 
 script = ExtResource( 1 )
 money = 500000
+apartment_goal_1 = null
+apartment_goal_2 = null
+apartment_goal_3 = null
+apartment_max_1 = null
+apartment_max_2 = null
+apartment_max_3 = null
 
 [node name="Sky" type="TextureRect" parent="." index="0"]
 
@@ -33,7 +40,9 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 0
 
-[node name="Left Side" type="Node2D" parent="." index="1"]
+[node name="GUI" parent="." index="1" instance=ExtResource( 3 )]
+
+[node name="Left Side" type="Node2D" parent="." index="2"]
 
 position = Vector2( 263.74, 1030.36 )
 
@@ -53,7 +62,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 stretch_mode = 2
 _sections_unfolded = [ "Margin", "Rect" ]
 
@@ -73,7 +82,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 stretch_mode = 2
 _sections_unfolded = [ "Rect" ]
 
@@ -93,7 +102,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 stretch_mode = 2
 
 [node name="Area2D" type="StaticBody2D" parent="Left Side" index="3"]
@@ -116,7 +125,7 @@ __meta__ = {
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Right Side" type="Node2D" parent="." index="2"]
+[node name="Right Side" type="Node2D" parent="." index="3"]
 
 position = Vector2( 1574.67, 1030.36 )
 
@@ -136,7 +145,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 stretch_mode = 2
 _sections_unfolded = [ "Margin", "Rect" ]
 
@@ -156,7 +165,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 stretch_mode = 2
 _sections_unfolded = [ "Rect" ]
 
@@ -176,7 +185,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 stretch_mode = 2
 
 [node name="Area2D" type="StaticBody2D" parent="Right Side" index="3"]
@@ -199,22 +208,22 @@ __meta__ = {
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="GroundJoint" parent="." index="3" instance=ExtResource( 6 )]
+[node name="GroundJoint" parent="." index="4" instance=ExtResource( 7 )]
 
 position = Vector2( 222.733, 1050 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 
-[node name="GroundJoint2" parent="." index="4" instance=ExtResource( 6 )]
+[node name="GroundJoint2" parent="." index="5" instance=ExtResource( 7 )]
 
 position = Vector2( 1535.6, 1050 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 
-[node name="GroundJoint3" parent="." index="5" instance=ExtResource( 6 )]
+[node name="GroundJoint3" parent="." index="6" instance=ExtResource( 7 )]
 
 position = Vector2( 1613.62, 1050 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 
-[node name="GroundJoint4" parent="." index="6" instance=ExtResource( 6 )]
+[node name="GroundJoint4" parent="." index="7" instance=ExtResource( 7 )]
 
 position = Vector2( 301.829, 1050 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform" ]

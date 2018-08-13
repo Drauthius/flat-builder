@@ -16,3 +16,6 @@ func set_insufficient(insufficient):
 	
 	money_symbol.add_color_override("font_color", color)
 	money_label.add_color_override("font_color", color)
+
+func _on_MenuButton_pressed():
+	get_tree().change_scene("res://levels/MainMenu.tscn")

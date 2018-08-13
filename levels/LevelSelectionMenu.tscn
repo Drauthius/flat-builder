@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://levels/LevelSelectionMenu.gd" type="Script" id=1]
 
-[node name="MainMenu" type="Node" index="0"]
+[node name="LevelSelectionMenu" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -26,25 +26,25 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 879.0
-margin_top = 497.0
-margin_right = 1041.0
-margin_bottom = 583.0
+margin_left = 917.0
+margin_top = 485.0
+margin_right = 1002.0
+margin_bottom = 595.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-alignment = 1
+alignment = 0
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" index="0"]
+[node name="level selection label" type="Label" parent="CenterContainer/VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 162.0
+margin_right = 85.0
 margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -52,19 +52,19 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-text = "GAME THINGUMMY TITLE"
+text = "Select a level"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer" index="1"]
+[node name="Level1" type="Button" parent="CenterContainer/VBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0
-margin_right = 162.0
+margin_right = 85.0
 margin_bottom = 38.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -77,18 +77,18 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Start Game"
+text = "Level 1"
 flat = false
 align = 1
 
-[node name="OptionsButton" type="Button" parent="CenterContainer/VBoxContainer" index="2"]
+[node name="Level2" type="Button" parent="CenterContainer/VBoxContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 42.0
-margin_right = 162.0
+margin_right = 85.0
 margin_bottom = 62.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -101,18 +101,18 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Options"
+text = "Level 2"
 flat = false
 align = 1
 
-[node name="ExitButton" type="Button" parent="CenterContainer/VBoxContainer" index="3"]
+[node name="Level999" type="Button" parent="CenterContainer/VBoxContainer" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 66.0
-margin_right = 162.0
+margin_right = 85.0
 margin_bottom = 86.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -125,12 +125,40 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Exit Game"
+text = "Level 999"
 flat = false
 align = 1
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[node name="Back" type="Button" parent="CenterContainer/VBoxContainer" index="4"]
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 90.0
+margin_right = 85.0
+margin_bottom = 110.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Back"
+flat = false
+align = 1
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Level1" to="." method="_on_Level1_pressed"]
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Level2" to="." method="_on_Level2_pressed"]
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Level999" to="." method="_on_Level999_pressed"]
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Back" to="." method="_on_Back_pressed"]
 
 

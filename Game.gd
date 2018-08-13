@@ -7,7 +7,7 @@ var Apartment2x2 = preload("res://scenes/Apartment2x2.tscn")
 var Beam = preload("res://scenes/Beam.tscn")
 var BeamSprite = preload("res://scenes/BeamSprite.tscn")
 var CostText = preload("res://scenes/CostText.tscn")
-var SoundService = preload("res://scripts/SoundService.gd").new()
+onready var SoundService = $"/root/SoundService"
 
 export(int, 1000000) var money
 export(int, 100) var apartment_goal_1

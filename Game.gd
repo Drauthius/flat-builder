@@ -24,18 +24,16 @@ var beams = []
 var joints = []
 var breakable_joints = []
 var apartments = []
-var current_mode
 
 enum MODES {
 	BEAM_MODE,
 	APARTMENT_MODE,
 	PHYSICS_MODE
 }
+var current_mode = MODES.BEAM_MODE
 
 func _ready():
 	SoundService.call_my_var()
-	
-	current_mode = MODES.BEAM_MODE
 	
 	# Add the ground joints that are available in the level (identified as RigidBody2D).
 	for node in get_children():
@@ -78,28 +76,26 @@ func _process(delta):
 		joint.queue_free()
 	
 	if current_mode != MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_accept"):
-		current_mode = MODES.PHYSICS_MODE
 		play()
-	elif current_mode == MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_cancel"):
-		current_mode = MODES.BEAM_MODE
+	elif current_mode != MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_cancel"):
+		_clear_placing(true)
+	elif current_mode == MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_tab"):
 		pause()
-	elif current_mode != MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_tab") and not placing:
-		if current_mode == MODES.BEAM_MODE:
+	elif current_mode != MODES.PHYSICS_MODE:
+		var instanciate = null
+		if Input.is_key_pressed(KEY_1):
+			instanciate = Apartment1x1
+		elif Input.is_key_pressed(KEY_2):
+			instanciate = Apartment2x1
+		elif Input.is_key_pressed(KEY_3):
+			instanciate = Apartment1x2
+		elif Input.is_key_pressed(KEY_4):
+			instanciate = Apartment2x2
+			
+		if instanciate:
+			_clear_placing(true)
 			current_mode = MODES.APARTMENT_MODE
-		elif current_mode == MODES.APARTMENT_MODE:
-			current_mode = MODES.BEAM_MODE
-		print("current_mode ", current_mode)
-	elif not placing and current_mode == MODES.APARTMENT_MODE and Input.is_key_pressed(KEY_1):
-		instanciate_apartment(Apartment1x1)
-	elif not placing and current_mode == MODES.APARTMENT_MODE and Input.is_key_pressed(KEY_2):
-		instanciate_apartment(Apartment2x1)
-	elif not placing and current_mode == MODES.APARTMENT_MODE and Input.is_key_pressed(KEY_3):
-		instanciate_apartment(Apartment1x2)
-	elif not placing and current_mode == MODES.APARTMENT_MODE and Input.is_key_pressed(KEY_4):
-		instanciate_apartment(Apartment2x2)
-	else:
-#		print("unhandled stuff")
-		pass
+			instanciate_apartment(instanciate)
 
 func instanciate_apartment(type):
 	placing = type.instance()
@@ -108,6 +104,8 @@ func instanciate_apartment(type):
 
 # Start physics.
 func play():
+	_clear_placing(true)
+	current_mode = MODES.PHYSICS_MODE
 	print("PHYSICS!")
 	for beam in beams:
 		beam.get_node("Mid").mode = RigidBody2D.MODE_RIGID
@@ -123,6 +121,7 @@ func play():
 
 # Stop physics
 func pause():
+	_clear_placing(true)
 	print("no physics")
 	for beam in beams:
 		beam.get_node("Mid").mode = RigidBody2D.MODE_KINEMATIC
@@ -188,18 +187,13 @@ func _unhandled_input(event):
 		_place_beam(position)
 	#handling apartments
 	elif current_mode == MODES.APARTMENT_MODE:
+		get_tree().set_input_as_handled() # Marked as handled.
+		
 		# Update the placing node, so that _place_beam puts the end at the right place.
 		_update_placing_apartment()
-		if placing:
-			print("apartment input")
-			get_tree().set_input_as_handled() # Marked as handled.
-		# Create a shape + transform for checking if a click connects to an existing joint.
-			var transform = Transform2D(0.0, event.position)
-			var connecting_joints = []
-			_place_apartment(event.position)
-			#conditional stuff for when to place an apartment?
-			if false:
-				pass
+		print("apartment input")
+
+		_place_apartment(event.position)
 
 # Called when a joint (ground or from a beam) is clicked.
 func _on_Joint_clicked(joint):
@@ -300,11 +294,7 @@ func _place_beam(position, other_joint = null):
 			breakable_joints.append(joint)
 
 	# Clear the placing stuff.
-	placing.queue_free()
-	placing = null
-	from = null
-	cost_text.queue_free()
-	cost_text = null
+	_clear_placing(true)
 	# Reset GUI
 	$GUI.set_insufficient(false)
 
@@ -312,8 +302,19 @@ func _place_apartment(position):
 	placing.set_position(position)
 	placing.connect("destroyed", self, "_on_Apartment_destroyed")
 	apartments.append(placing)
+	_clear_placing(false)
+
+func _clear_placing(free):
+	# Reset the current mode to the default.
+	current_mode = MODES.BEAM_MODE
+	
+	if placing and free:
+		placing.queue_free()
+	if cost_text:
+		cost_text.queue_free()
+	cost_text = null
 	placing = null
-	from = null #just to be safe
+	from = null
 
 func _on_MenuButton_up():
 	print("Menu!") # TODO: Go to menu scene

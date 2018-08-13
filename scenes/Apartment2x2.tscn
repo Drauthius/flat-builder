@@ -3,7 +3,7 @@
 [ext_resource path="res://Apartment.gd" type="Script" id=1]
 [ext_resource path="res://sprites/kitchen.png" type="Texture" id=2]
 
-[node name="Apartment2x2" type="RigidBody2D"]
+[node name="Apartment2x2" type="RigidBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 3
@@ -40,13 +40,14 @@ margin_right = 64.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 1
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 0
+_sections_unfolded = [ "Mouse" ]
 
 [node name="TextureRect2" type="TextureRect" parent="." index="2"]
 
@@ -58,13 +59,14 @@ margin_left = -64.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 1
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 0
+_sections_unfolded = [ "Mouse", "Rect" ]
 
 [node name="TextureRect3" type="TextureRect" parent="." index="3"]
 
@@ -76,12 +78,13 @@ margin_top = -64.0
 margin_right = 64.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 1
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 0
+_sections_unfolded = [ "Mouse" ]
 
 

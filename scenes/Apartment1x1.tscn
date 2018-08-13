@@ -41,6 +41,7 @@ margin_left = -32.0
 margin_top = -32.0
 margin_right = 32.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 64, 64 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -50,6 +51,6 @@ size_flags_vertical = 1
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 0
-_sections_unfolded = [ "Mouse", "Visibility" ]
+_sections_unfolded = [ "Transform" ]
 
 

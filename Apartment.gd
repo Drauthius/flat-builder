@@ -8,6 +8,7 @@ var num_speeds = 3
 var max_degrees = 45
 var max_speed_squared = 1000
 var speeds = []
+var destroyed = false
 
 func _ready():
 	for i in range(num_speeds):
@@ -34,6 +35,9 @@ func _on_VisibilityNotifier2D_screen_exited():
 	destroy()
 
 func destroy():
+	if destroyed:
+		return
+	
 	emit_signal("destroyed", self)
 	# Add a puff of smoke.
 	var smoke = Smoke.instance()
@@ -41,4 +45,5 @@ func destroy():
 	smoke.position = get_global_transform().origin
 	smoke.emitting = true
 	
+	destroyed = true
 	queue_free()

@@ -89,6 +89,7 @@ func remove_apartment(rooms):
 	
 	apt_checkboxes[rooms].pressed = apt_nums[rooms] >= apt_goal[rooms]
 	apt_buttons[rooms].increase_number()
+	print("remove")
 
 func _on_MenuButton_pressed():
 	get_tree().change_scene("res://levels/MainMenu.tscn")

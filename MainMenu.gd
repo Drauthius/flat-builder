@@ -1,6 +1,7 @@
 extends Node
 
 func _ready():
+	var SoundService = $"/root/SoundService"
 	SoundService.stop_all_music()
 	SoundService.mainmenu_music_loop01()
 

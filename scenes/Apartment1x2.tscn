@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Apartment.gd" type="Script" id=1]
-[ext_resource path="res://sprites/kitchen.png" type="Texture" id=2]
+[ext_resource path="res://sprites/room1x2.png" type="Texture" id=2]
 
 [node name="Apartment1x2" type="RigidBody2D" index="0"]
 
@@ -37,6 +37,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = -32.0
+margin_top = -64.0
 margin_right = 32.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -48,29 +49,9 @@ size_flags_vertical = 1
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 0
-_sections_unfolded = [ "Mouse" ]
+_sections_unfolded = [ "Mouse", "Rect" ]
 
-[node name="TextureRect2" type="TextureRect" parent="." index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -32.0
-margin_top = -64.0
-margin_right = 32.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-texture = ExtResource( 2 )
-expand = true
-stretch_mode = 0
-_sections_unfolded = [ "Mouse" ]
-
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="3"]
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="2"]
 
 rect = Rect2( -32, -64, 64, 128 )
 

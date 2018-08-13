@@ -47,7 +47,6 @@ enum MODES {
 var current_mode = MODES.BEAM_MODE
 
 func _ready():
-	
 	camera = Camera.instance()
 	add_child(camera)
 	

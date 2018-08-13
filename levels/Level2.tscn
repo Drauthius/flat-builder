@@ -13,10 +13,13 @@
 custom_solver_bias = 0.0
 extents = Vector2( 57.6945, 40 )
 
-[node name="Level2" type="Node"]
+[node name="Level2" type="Node" index="0"]
 
 script = ExtResource( 1 )
-money = 500000
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
+money = 10000
 apartment_goal_1 = 14
 apartment_goal_2 = 12
 apartment_goal_3 = 8
@@ -44,7 +47,7 @@ stretch_mode = 0
 
 [node name="Left Side" type="Node2D" parent="." index="2"]
 
-position = Vector2( 263.74, 1030.36 )
+position = Vector2( 540, 1030 )
 
 [node name="GrassTiles" type="TextureRect" parent="Left Side" index="0"]
 
@@ -127,7 +130,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Right Side" type="Node2D" parent="." index="3"]
 
-position = Vector2( 1574.67, 1030.36 )
+position = Vector2( 1380, 1030 )
 
 [node name="GrassTiles" type="TextureRect" parent="Right Side" index="0"]
 
@@ -210,22 +213,22 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="GroundJoint" parent="." index="4" instance=ExtResource( 7 )]
 
-position = Vector2( 222.733, 1050 )
+position = Vector2( 500, 1050 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 
 [node name="GroundJoint2" parent="." index="5" instance=ExtResource( 7 )]
 
-position = Vector2( 1535.6, 1050 )
+position = Vector2( 1340, 1050 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 
 [node name="GroundJoint3" parent="." index="6" instance=ExtResource( 7 )]
 
-position = Vector2( 1613.62, 1050 )
+position = Vector2( 1420, 1050 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 
 [node name="GroundJoint4" parent="." index="7" instance=ExtResource( 7 )]
 
-position = Vector2( 301.829, 1050 )
+position = Vector2( 580, 1050 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 
 

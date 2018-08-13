@@ -30,6 +30,9 @@ func _integrate_forces(state):
 #		if state.get_contact_collider_velocity_at_position(i).length_squared() > 10000:
 #			destroy()
 
+func _on_VisibilityNotifier2D_screen_exited():
+	destroy()
+
 func destroy():
 	emit_signal("destroyed", self)
 	# Add a puff of smoke.

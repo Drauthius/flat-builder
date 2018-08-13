@@ -3,8 +3,7 @@
 [ext_resource path="res://Apartment.gd" type="Script" id=1]
 [ext_resource path="res://sprites/room2x1.png" type="Texture" id=2]
 
-
-[node name="Apartment2x1" type="RigidBody2D" index="0"]
+[node name="Apartment2x1" type="RigidBody2D"]
 
 input_pickable = false
 collision_layer = 3
@@ -51,5 +50,11 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 0
 _sections_unfolded = [ "Mouse", "Rect" ]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="2"]
+
+rect = Rect2( -64, -32, 128, 64 )
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 
 

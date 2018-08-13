@@ -1,15 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://sprites/landscape.png" type="Texture" id=2]
 [ext_resource path="res://sprites/mountain-wall.png" type="Texture" id=3]
 [ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/GroundJoint.tscn" type="PackedScene" id=5]
-
-[sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
-extents = Vector2( 83.5874, 66.0884 )
 
 [node name="Level1" type="Node" index="0"]
 
@@ -68,7 +63,7 @@ position = Vector2( 118.064, 377.655 )
 
 [node name="GroundJoint4" parent="." index="6" instance=ExtResource( 5 )]
 
-position = Vector2( 77.5558, 550.829 )
+position = Vector2( 73.9634, 561.008 )
 
 [node name="GroundJoint5" parent="." index="7" instance=ExtResource( 5 )]
 
@@ -87,178 +82,10 @@ friction = 1.0
 bounce = 0.0
 _sections_unfolded = [ "Collision", "Pickable" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" index="0"]
 
-position = Vector2( 0.670279, 83.5454 )
-rotation = 1.9273e-005
-scale = Vector2( 1, 1.41919 )
-shape = SubResource( 1 )
-
-[node name="Area2D2" type="StaticBody2D" parent="." index="9"]
-
-position = Vector2( 38.831, 792.042 )
-rotation = 0.118897
-input_pickable = false
-collision_layer = 3
-collision_mask = 3
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision", "Pickable" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" index="0"]
-
-position = Vector2( -12.4424, 88.1479 )
-rotation = -0.109491
-scale = Vector2( 1, 1.41919 )
-shape = SubResource( 1 )
-
-[node name="Area2D3" type="StaticBody2D" parent="." index="10"]
-
-position = Vector2( -9.72826, 669.472 )
-rotation = -0.209849
-scale = Vector2( 1, 0.822542 )
-input_pickable = false
-collision_layer = 3
-collision_mask = 3
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision", "Pickable" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3" index="0"]
-
-position = Vector2( -12.4424, 88.1479 )
-rotation = -0.109491
-scale = Vector2( 1, 1.41919 )
-shape = SubResource( 1 )
-
-[node name="Area2D4" type="StaticBody2D" parent="." index="11"]
-
-position = Vector2( 2.33045, 544.363 )
-rotation = 0.120908
-scale = Vector2( 1, 0.822542 )
-input_pickable = false
-collision_layer = 3
-collision_mask = 3
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision", "Pickable" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4" index="0"]
-
-position = Vector2( -12.4424, 88.1479 )
-rotation = -0.109491
-scale = Vector2( 1, 1.41919 )
-shape = SubResource( 1 )
-
-[node name="Area2D5" type="StaticBody2D" parent="." index="12"]
-
-position = Vector2( 32.4773, 437.341 )
-rotation = 0.414725
-scale = Vector2( 1, 0.822542 )
-input_pickable = false
-collision_layer = 3
-collision_mask = 3
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision", "Pickable" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D5" index="0"]
-
-position = Vector2( -28.0873, 89.8678 )
-rotation = -0.109491
-scale = Vector2( 1.18177, 1.41919 )
-shape = SubResource( 1 )
-
-[node name="Area2D6" type="StaticBody2D" parent="." index="13"]
-
-position = Vector2( 56.5947, 295.651 )
-rotation = 0.304774
-scale = Vector2( 1, 0.822542 )
-input_pickable = false
-collision_layer = 3
-collision_mask = 3
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision", "Pickable" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D6" index="0"]
-
-position = Vector2( -42.5831, 91.4613 )
-rotation = -0.109491
-scale = Vector2( 1.35019, 1.41919 )
-shape = SubResource( 1 )
-
-[node name="Area2D7" type="StaticBody2D" parent="." index="14"]
-
-position = Vector2( 97.293, 178.079 )
-rotation = 0.49671
-scale = Vector2( 1, 0.822542 )
-input_pickable = false
-collision_layer = 3
-collision_mask = 3
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision", "Pickable" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D7" index="0"]
-
-position = Vector2( -40.3992, 91.2212 )
-rotation = -0.109491
-scale = Vector2( 1.32482, 1.41919 )
-shape = SubResource( 1 )
-
-[node name="Area2D8" type="StaticBody2D" parent="." index="15"]
-
-position = Vector2( 137.991, 99.6974 )
-rotation = 0.630991
-scale = Vector2( 1, 0.822542 )
-input_pickable = false
-collision_layer = 3
-collision_mask = 3
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision", "Pickable" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D8" index="0"]
-
-position = Vector2( -49.6576, 92.239 )
-rotation = -0.109491
-scale = Vector2( 1.43239, 1.41919 )
-shape = SubResource( 1 )
-
-[node name="Area2D9" type="StaticBody2D" parent="." index="16"]
-
-position = Vector2( 151.557, -26.9192 )
-rotation = 0.276109
-scale = Vector2( 1, 0.822542 )
-input_pickable = false
-collision_layer = 3
-collision_mask = 3
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision", "Pickable" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D9" index="0"]
-
-position = Vector2( -39.7133, 91.1458 )
-rotation = -0.109491
-scale = Vector2( 1.31685, 1.41919 )
-shape = SubResource( 1 )
+rotation = -2.65365
+build_mode = 0
+polygon = PoolVector2Array( -125.421, -53.254, -116.928, -28.3277, -96.9949, -3.27429, -97.8365, 12.3235, -71.3579, 42.1885, -67.4443, 56.449, 14.8785, 169.831, 30.1729, 182.325, 49.8687, 205.729, 76.0399, 225.797, 120.523, 249.386, 210.535, 360.902, 220.822, 393.676, 228.473, 402.126, 225.955, 414.115, 234.039, 422.242, 237.219, 445.486, 264.782, 484.25, 270.01, 509.337, 285.921, 540.612, 296.149, 555.229, 305.034, 587.026, 317.435, 597.326, 318.383, 606.731, 328.83, 619.836, 327.378, 637.772, 338.67, 658.336, 338.436, 665.252, 341.879, 670.773, 341.785, 705.896, 355.597, 754.241, 356.076, 777.478, 365.643, 796.633, 382.126, 816.022, 392.538, 842.635, 421.592, 889.724, 642.39, 725.72, 3.53192, -148.024, -124.138, -53.4772 )
 
 

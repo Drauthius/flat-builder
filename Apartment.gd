@@ -2,6 +2,8 @@ extends RigidBody2D
 
 signal destroyed
 
+var Smoke = preload("res://scenes/Smoke.tscn")
+
 var num_speeds = 3
 var max_degrees = 45
 var max_speed_squared = 1000
@@ -30,4 +32,10 @@ func _integrate_forces(state):
 
 func destroy():
 	emit_signal("destroyed", self)
+	# Add a puff of smoke.
+	var smoke = Smoke.instance()
+	get_tree().get_root().add_child(smoke)
+	smoke.position = get_global_transform().origin
+	smoke.emitting = true
+	
 	queue_free()

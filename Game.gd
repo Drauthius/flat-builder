@@ -47,8 +47,6 @@ enum MODES {
 var current_mode = MODES.BEAM_MODE
 
 func _ready():
-	SoundService.stop_all_music()
-	SoundService.basic_music_loop01()
 	
 	camera = Camera.instance()
 	add_child(camera)

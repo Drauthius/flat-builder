@@ -14,6 +14,7 @@ var min_beam_length = 16
 var max_beam_length = 128
 var min_beam_cost = 25
 var max_beam_cost = 100
+var max_joint_separation = 2.0
 
 var from = null
 var placing = null
@@ -51,7 +52,6 @@ func _ready():
 	$GUI/VBoxContainer/ButtonsContainer/Buttons/RestartButton.connect("button_up", self, "_on_RestartButton_up")
 
 func _process(delta):
-	var max_joint_separation = 1.0
 	if placing and current_mode == MODES.BEAM_MODE:
 		_update_placing_beam()
 	if placing and current_mode == MODES.APARTMENT_MODE:
@@ -310,6 +310,7 @@ func _place_beam(position, other_joint = null):
 
 func _place_apartment(position):
 	placing.set_position(position)
+	placing.connect("destroyed", self, "_on_Apartment_destroyed")
 	apartments.append(placing)
 	placing = null
 	from = null #just to be safe
@@ -323,3 +324,6 @@ func _on_StartButton_up():
 
 func _on_RestartButton_up():
 	get_tree().reload_current_scene()
+
+func _on_Apartment_destroyed(object):
+	apartments.erase(object)

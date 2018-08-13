@@ -90,6 +90,7 @@ func _process(delta):
 		if diff > max_joint_separation:
 			joints_to_be_removed.append(joint)
 	for joint in joints_to_be_removed:
+		SoundService.beam_joint_destruction()
 		breakable_joints.erase(joint)
 		joint.queue_free()
 	
@@ -356,6 +357,7 @@ func _place_apartment(position):
 	#camera.shake(Vector2(0.5, 0.5), 0.1)
 
 func _on_Apartment_destroyed(object):
+	SoundService.block_destruction()
 	var num_rooms = 0
 	if "1x1" in object.get_name():
 		num_rooms = 1

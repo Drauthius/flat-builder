@@ -47,7 +47,8 @@ enum MODES {
 var current_mode = MODES.BEAM_MODE
 
 func _ready():
-#	SoundService.attach_audiostream_players(self)
+	SoundService.stop_all_music()
+	SoundService.basic_music_loop01()
 	
 	camera = Camera.instance()
 	add_child(camera)
@@ -149,6 +150,7 @@ func instantiate_apartment(rooms):
 
 # Start physics.
 func play():
+	SoundService.physics_pause()
 	start_time = 0.0
 	_clear_placing(true)
 	current_mode = MODES.PHYSICS_MODE
@@ -167,6 +169,7 @@ func play():
 
 # Stop physics
 func pause():
+	SoundService.physics_pause()
 	start_time = 0.0
 	_clear_placing(true)
 	$GUI.set_build_mode()

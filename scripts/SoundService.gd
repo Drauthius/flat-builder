@@ -1,5 +1,3 @@
-extends Node
-
 var beam_placement_selection_player = AudioStreamPlayer.new()
 var beam_placement_finalise_player = AudioStreamPlayer.new()
 
@@ -7,7 +5,6 @@ var block_placement_selection_player = AudioStreamPlayer.new()
 var block_placement_finalise_player = AudioStreamPlayer.new()
 
 var basic_music_loop01_player = AudioStreamPlayer.new()
-
 
 func _init():
 	beam_placement_selection_player.stream = preload("res://music/beam_placement_selection.wav")
@@ -17,9 +14,6 @@ func _init():
 	block_placement_finalise_player.stream = preload("res://music/block_placement_finalise.wav")
 	
 	basic_music_loop01_player.stream = preload("res://music/01basic_music_loop.tres")
-
-func _ready():
-	pass
 
 func attach_audiostream_players(node):
 	node.add_child(beam_placement_selection_player)
@@ -42,4 +36,3 @@ func block_placement_finalise():
 
 func basic_music_loop01():
 	basic_music_loop01_player.play()
-

@@ -19,6 +19,12 @@ func _ready():
 	block_placement_selection_player.stream = preload("res://music/block_placement_selection.wav")
 	block_placement_finalise_player.stream = preload("res://music/block_placement_finalise.wav")
 	
+	add_child(beam_placement_selection_player)
+	add_child(beam_placement_finalise_player)
+	add_child(block_placement_selection_player)
+	add_child(block_placement_finalise_player)
+	add_child(physics_start_player)
+	
 #	physics_start_player.stream = preload("res://music/physics_start.wav")
 
 func attach_audiostream_players(node):

@@ -57,15 +57,24 @@ size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Margin", "Mouse" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." index="0"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
+
+layer = 2
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 8.0
-margin_right = 1900.0
-margin_bottom = 1060.0
+margin_left = 18.0
+margin_top = 10.0
+margin_right = 1910.0
+margin_bottom = 1070.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -75,7 +84,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Mouse" ]
 
-[node name="TopContainer" type="HBoxContainer" parent="VBoxContainer" index="0"]
+[node name="TopContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -92,7 +101,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Mouse" ]
 
-[node name="MoneySymbol" type="Label" parent="VBoxContainer/TopContainer" index="0"]
+[node name="MoneySymbol" type="Label" parent="CanvasLayer/VBoxContainer/TopContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -114,7 +123,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "Mouse", "Theme" ]
 
-[node name="Money" type="Label" parent="VBoxContainer/TopContainer" index="1"]
+[node name="Money" type="Label" parent="CanvasLayer/VBoxContainer/TopContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -137,7 +146,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Mouse", "Size Flags", "Theme" ]
 
-[node name="Mode" type="Label" parent="VBoxContainer/TopContainer" index="2"]
+[node name="Mode" type="Label" parent="CanvasLayer/VBoxContainer/TopContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -165,7 +174,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_constants" ]
 
-[node name="MenuButton" type="TextureButton" parent="VBoxContainer/TopContainer" index="3"]
+[node name="MenuButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/TopContainer" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -193,7 +202,7 @@ expand = true
 stretch_mode = 4
 _sections_unfolded = [ "Rect", "Size Flags", "Textures" ]
 
-[node name="ObjectivesContainer" type="HBoxContainer" parent="VBoxContainer" index="1"]
+[node name="ObjectivesContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -211,7 +220,7 @@ size_flags_vertical = 1
 alignment = 2
 _sections_unfolded = [ "Mouse" ]
 
-[node name="Background" type="ColorRect" parent="VBoxContainer/ObjectivesContainer" index="0"]
+[node name="Background" type="ColorRect" parent="CanvasLayer/VBoxContainer/ObjectivesContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -230,7 +239,7 @@ size_flags_vertical = 1
 color = Color( 1, 1, 1, 0.588235 )
 _sections_unfolded = [ "Mouse", "Rect" ]
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/ObjectivesContainer/Background" index="0"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -249,7 +258,7 @@ size_flags_vertical = 1
 color = Color( 0.215412, 0.21875, 0.197388, 0.588235 )
 _sections_unfolded = [ "Margin" ]
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -265,7 +274,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -283,7 +292,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Margin", "Rect", "Size Flags" ]
 
-[node name="ObjectivesText" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="0"]
+[node name="ObjectivesText" type="Label" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -306,7 +315,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Rect", "custom_colors" ]
 
-[node name="Divider" type="ColorRect" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="1"]
+[node name="Divider" type="ColorRect" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="1"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -326,7 +335,7 @@ size_flags_vertical = 1
 color = Color( 1, 1, 1, 1 )
 _sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 
-[node name="Shadow" type="ColorRect" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/Divider" index="0"]
+[node name="Shadow" type="ColorRect" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/Divider" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -345,7 +354,7 @@ size_flags_vertical = 2
 color = Color( 0, 0, 0, 1 )
 _sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags" ]
 
-[node name="1RoomApartments" type="HBoxContainer" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="2"]
+[node name="1RoomApartments" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -362,14 +371,14 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments" index="0"]
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 24.0
-margin_bottom = 24.0
+margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -384,7 +393,7 @@ group = null
 flat = false
 align = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments" index="1"]
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -407,7 +416,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Size Flags", "custom_colors", "custom_fonts" ]
 
-[node name="Label2" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments" index="2"]
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -431,7 +440,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Size Flags", "custom_colors", "custom_fonts" ]
 
-[node name="2RoomApartments" type="HBoxContainer" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="3"]
+[node name="2RoomApartments" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -448,7 +457,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments" index="0"]
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -470,7 +479,7 @@ group = null
 flat = false
 align = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments" index="1"]
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -493,7 +502,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Size Flags", "custom_colors", "custom_fonts" ]
 
-[node name="Label2" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments" index="2"]
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -517,7 +526,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Size Flags", "custom_colors", "custom_fonts" ]
 
-[node name="3RoomApartments" type="HBoxContainer" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="4"]
+[node name="3RoomApartments" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -534,7 +543,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments" index="0"]
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -556,7 +565,7 @@ group = null
 flat = false
 align = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments" index="1"]
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -579,7 +588,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Size Flags", "custom_colors", "custom_fonts" ]
 
-[node name="Label2" type="Label" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments" index="2"]
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -603,7 +612,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Size Flags", "custom_colors", "custom_fonts" ]
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="VBoxContainer" index="2"]
+[node name="ButtonsContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -621,7 +630,7 @@ size_flags_vertical = 3
 alignment = 2
 _sections_unfolded = [ "Mouse", "Size Flags" ]
 
-[node name="Buttons" type="VBoxContainer" parent="VBoxContainer/ButtonsContainer" index="0"]
+[node name="Buttons" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/ButtonsContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -639,7 +648,7 @@ size_flags_vertical = 1
 alignment = 2
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags" ]
 
-[node name="StartButton" type="TextureButton" parent="VBoxContainer/ButtonsContainer/Buttons" index="0"]
+[node name="StartButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/ButtonsContainer/Buttons" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -667,7 +676,7 @@ texture_disabled = ExtResource( 9 )
 expand = true
 _sections_unfolded = [ "Rect", "Textures" ]
 
-[node name="RestartButton" type="TextureButton" parent="VBoxContainer/ButtonsContainer/Buttons" index="1"]
+[node name="RestartButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/ButtonsContainer/Buttons" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -694,10 +703,10 @@ texture_hover = ExtResource( 13 )
 expand = true
 _sections_unfolded = [ "Rect", "Textures" ]
 
-[connection signal="pressed" from="VBoxContainer/TopContainer/MenuButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/TopContainer/MenuButton" to="." method="_on_MenuButton_pressed"]
 
-[connection signal="button_up" from="VBoxContainer/ButtonsContainer/Buttons/StartButton" to="." method="_on_StartButton_button_up"]
+[connection signal="button_up" from="CanvasLayer/VBoxContainer/ButtonsContainer/Buttons/StartButton" to="." method="_on_StartButton_button_up"]
 
-[connection signal="button_up" from="VBoxContainer/ButtonsContainer/Buttons/RestartButton" to="." method="_on_RestartButton_button_up"]
+[connection signal="button_up" from="CanvasLayer/VBoxContainer/ButtonsContainer/Buttons/RestartButton" to="." method="_on_RestartButton_button_up"]
 
 

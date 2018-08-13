@@ -6,6 +6,7 @@ var Apartment1x2 = preload("res://scenes/Apartment1x2.tscn")
 var Apartment2x2 = preload("res://scenes/Apartment2x2.tscn")
 var Beam = preload("res://scenes/Beam.tscn")
 var BeamSprite = preload("res://scenes/BeamSprite.tscn")
+var Camera = preload("res://scenes/Camera.tscn")
 var CostText = preload("res://scenes/CostText.tscn")
 var SoundService = preload("res://scripts/SoundService.gd").new()
 
@@ -32,6 +33,7 @@ var placing = null
 var cost_text = null
 
 var start_time
+var camera
 var beams = []
 var joints = []
 var breakable_joints = []
@@ -46,6 +48,9 @@ var current_mode = MODES.BEAM_MODE
 
 func _ready():
 	SoundService.attach_audiostream_players(self)
+	
+	camera = Camera.instance()
+	add_child(camera)
 	
 	# Add the ground joints that are available in the level (identified as RigidBody2D).
 	for node in get_children():
@@ -347,6 +352,8 @@ func _place_apartment(position):
 	
 	apartments.append(placing)
 	_clear_placing(false)
+	
+	#camera.shake(Vector2(0.5, 0.5), 0.1)
 
 func _on_Apartment_destroyed(object):
 	var num_rooms = 0
@@ -361,6 +368,8 @@ func _on_Apartment_destroyed(object):
 	num_apts[num_rooms] -= 1
 	$GUI.remove_apartment(num_rooms)	
 	apartments.erase(object)
+	
+	camera.shake(Vector2(5.0, 5.0), 0.2)
 
 func _clear_placing(free):
 	# Reset the current mode to the default.

@@ -20,12 +20,12 @@ __meta__ = {
 "_edit_vertical_guides_": [  ]
 }
 money = 10000
-apartment_goal_1 = 14
-apartment_goal_2 = 12
-apartment_goal_3 = 8
-apartment_max_1 = 16
-apartment_max_2 = 14
-apartment_max_3 = 10
+apartment_goal_1 = 10
+apartment_goal_2 = 8
+apartment_goal_3 = 6
+apartment_max_1 = 12
+apartment_max_2 = 10
+apartment_max_3 = 6
 
 [node name="Sky" type="TextureRect" parent="." index="0"]
 

@@ -33,10 +33,6 @@ enum MODES {
 var current_mode = MODES.BEAM_MODE
 
 func _ready():
-	player = AudioStreamPlayer.new()
-	add_child(player)
-	player.stream = load("res://music/beam_placement_selection.wav")
-	
 	SoundService.attach_audiostream_players(self)
 	
 	# Add the ground joints that are available in the level (identified as RigidBody2D).

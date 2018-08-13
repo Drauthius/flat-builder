@@ -128,6 +128,8 @@ func instantiate_apartment(rooms):
 	if current_mode == MODES.PHYSICS_MODE:
 		return
 	
+	SoundService.block_placement_selection_()
+	
 	_clear_placing(true)
 	current_mode = MODES.APARTMENT_MODE
 	
@@ -368,6 +370,8 @@ func _place_apartment(position):
 	
 	apartments.append(placing)
 	_clear_placing(false)
+	
+	SoundService.block_placement_finalise()
 	
 	#camera.shake(Vector2(0.5, 0.5), 0.1)
 

@@ -66,58 +66,51 @@ func _ready():
 	# Connect GUI signals
 	# (Done here and not in the editor to avoid the necessary set-up for each new level/scene.)
 	$GUI.connect("start_game", self, "play")
+	$GUI.connect("place_apartment", self, "instantiate_apartment")
 
 func _process(delta):
-	if placing and current_mode == MODES.BEAM_MODE:
-		_update_placing_beam()
-	if placing and current_mode == MODES.APARTMENT_MODE:
-		_update_placing_apartment()
-	
-	var joints_to_be_removed = []
-	for joint in breakable_joints:
-		var r1 = get_node(joint.node_a).get_global_transform().origin
-		var r2 = get_node(joint.node_b).get_global_transform().origin
-		var diff = (r1 - r2).length()
-		if diff > max_joint_separation/2.0:
-			var x = -1.0  + diff*2.0/max_joint_separation
-#			var y = lerp(max_joint_separation/2.0, max_joint_separation, x)
-			get_node(joint.node_a).modulate = Color(1.0, 1.0-x, 1.0-x)
-			get_node(joint.node_b).modulate = Color(1.0, 1.0-x, 1.0-x)
-#			print(get_node(joint.node_a).modulate)
-		else:
-			get_node(joint.node_a).modulate = Color(1.0, 1.0, 1.0)
-			get_node(joint.node_b).modulate = Color(1.0, 1.0, 1.0)
-		if diff > max_joint_separation:
-			joints_to_be_removed.append(joint)
-	for joint in joints_to_be_removed:
-		SoundService.beam_joint_destruction()
-		breakable_joints.erase(joint)
-		joint.queue_free()
-	
 	if current_mode != MODES.PHYSICS_MODE:
+		if placing and current_mode == MODES.BEAM_MODE:
+			_update_placing_beam()
+		if placing and current_mode == MODES.APARTMENT_MODE:
+			_update_placing_apartment()
+		
 		if Input.is_action_just_pressed("ui_accept"):
 			play()
 		elif Input.is_action_just_pressed("ui_cancel"):
 			_clear_placing(true)
 		else:
-			var instantiate = null
+			var rooms = 0
 			if Input.is_action_just_pressed("apt_1") and num_apts[1] < apartment_max_1:
-				instantiate = Apartment1x1
+				rooms = 1
 			elif Input.is_action_just_pressed("apt_2") and num_apts[2] < apartment_max_2:
-				if randi() % 2 == 0:
-					instantiate = Apartment2x1
-				else:
-					instantiate = Apartment1x2
-			elif Input.is_action_just_pressed("apt_3") and num_apts[2] < apartment_max_3:
-				instantiate = Apartment2x2
+				rooms = 2
+			elif Input.is_action_just_pressed("apt_3") and num_apts[3] < apartment_max_3:
+				rooms = 3
 				
-			if instantiate:
-				_clear_placing(true)
-				current_mode = MODES.APARTMENT_MODE
-				instantiate_apartment(instantiate)
+			if rooms > 0:
+				instantiate_apartment(rooms)
 	else:
-		if current_mode == MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_tab"):
-			pause()
+		var joints_to_be_removed = []
+		for joint in breakable_joints:
+			var r1 = get_node(joint.node_a).get_global_transform().origin
+			var r2 = get_node(joint.node_b).get_global_transform().origin
+			var diff = (r1 - r2).length()
+			if diff > max_joint_separation/2.0:
+				var x = -1.0  + diff*2.0/max_joint_separation
+	#			var y = lerp(max_joint_separation/2.0, max_joint_separation, x)
+				get_node(joint.node_a).modulate = Color(1.0, 1.0-x, 1.0-x)
+				get_node(joint.node_b).modulate = Color(1.0, 1.0-x, 1.0-x)
+	#			print(get_node(joint.node_a).modulate)
+			else:
+				get_node(joint.node_a).modulate = Color(1.0, 1.0, 1.0)
+				get_node(joint.node_b).modulate = Color(1.0, 1.0, 1.0)
+			if diff > max_joint_separation:
+				joints_to_be_removed.append(joint)
+		for joint in joints_to_be_removed:
+			SoundService.beam_joint_destruction()
+			breakable_joints.erase(joint)
+			joint.queue_free()
 		
 		if start_time > play_time_wait: # Need to wait at least this time for things to start moving.
 			for apartment in apartments:
@@ -130,7 +123,26 @@ func _process(delta):
 		else:
 			start_time += delta
 
-func instantiate_apartment(type):
+func instantiate_apartment(rooms):
+	if current_mode == MODES.PHYSICS_MODE:
+		return
+	
+	_clear_placing(true)
+	current_mode = MODES.APARTMENT_MODE
+	
+	var type = null
+	match rooms:
+		1:
+			type = Apartment1x1
+		2:
+			if randi() % 2 == 0:
+				type = Apartment2x1
+			else:
+				type = Apartment1x2
+		3:
+			type = Apartment2x2
+	
+	assert(type != null)
 	placing = type.instance()
 	add_child(placing)
 	placing.set_position(get_viewport().get_mouse_position())

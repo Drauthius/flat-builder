@@ -19,11 +19,11 @@ extents = Vector2( 924.544, 66.0884 )
 script = ExtResource( 1 )
 money = 1500
 apartment_goal_1 = 2
-apartment_goal_2 = 0
-apartment_goal_3 = 0
-apartment_max_1 = 2
-apartment_max_2 = 0
-apartment_max_3 = 0
+apartment_goal_2 = 2
+apartment_goal_3 = 2
+apartment_max_1 = 6
+apartment_max_2 = 6
+apartment_max_3 = 6
 
 [node name="Sky" type="TextureRect" parent="." index="0"]
 

@@ -1,27 +1,33 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://GUI.gd" type="Script" id=1]
 [ext_resource path="res://resources/font_theme.tres" type="Theme" id=2]
-[ext_resource path="res://sprites/menubutton.png" type="Texture" id=3]
-[ext_resource path="res://fonts/MontereyFLF-Bold.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://fonts/MontereyFLF.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://sprites/play.png" type="Texture" id=6]
-[ext_resource path="res://sprites/refresh.png" type="Texture" id=7]
+[ext_resource path="res://sprites/menu.png" type="Texture" id=3]
+[ext_resource path="res://sprites/menu3.png" type="Texture" id=4]
+[ext_resource path="res://sprites/menu2.png" type="Texture" id=5]
+[ext_resource path="res://fonts/MontereyFLF-Bold.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://fonts/MontereyFLF.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://sprites/play.png" type="Texture" id=8]
+[ext_resource path="res://sprites/play3.png" type="Texture" id=9]
+[ext_resource path="res://sprites/play2.png" type="Texture" id=10]
+[ext_resource path="res://sprites/refresh.png" type="Texture" id=11]
+[ext_resource path="res://sprites/refresh3.png" type="Texture" id=12]
+[ext_resource path="res://sprites/refresh2.png" type="Texture" id=13]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 
 size = 48
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 4 )
+font_data = ExtResource( 6 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 
 size = 24
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 5 )
+font_data = ExtResource( 7 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [node name="GUI" type="MarginContainer" index="0"]
@@ -129,7 +135,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 1828.0
 margin_right = 1892.0
-margin_bottom = 64.0
+margin_bottom = 70.0
 rect_min_size = Vector2( 64, 64 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -143,6 +149,8 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
 expand = true
 _sections_unfolded = [ "Rect", "Size Flags", "Textures" ]
 
@@ -250,7 +258,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Objectives"
 align = 1
@@ -352,7 +360,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "1-room apartments"
 percent_visible = 1.0
@@ -375,7 +383,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "0/4"
 align = 2
@@ -438,7 +446,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "2-room apartments"
 percent_visible = 1.0
@@ -461,7 +469,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "0/4"
 align = 2
@@ -524,7 +532,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "3-room apartments"
 percent_visible = 1.0
@@ -547,7 +555,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "0/4"
 align = 2
@@ -613,7 +621,9 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 6 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 10 )
 expand = true
 _sections_unfolded = [ "Rect", "Textures" ]
 
@@ -638,7 +648,9 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 7 )
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 12 )
+texture_hover = ExtResource( 13 )
 expand = true
 _sections_unfolded = [ "Rect", "Textures" ]
 

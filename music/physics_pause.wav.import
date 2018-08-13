@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/physics_pause.wav-92f2dad7d1a43cb308c54205bcaab9bb.sample"
+
+[deps]
+
+source_file="res://music/physics_pause.wav"
+dest_files=[ "res://.import/physics_pause.wav-92f2dad7d1a43cb308c54205bcaab9bb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

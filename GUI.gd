@@ -5,6 +5,18 @@ signal start_game
 onready var money_symbol = $VBoxContainer/TopContainer/MoneySymbol
 onready var money_label = $VBoxContainer/TopContainer/Money
 
+onready var apt_1_label = $"VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments/Label2"
+onready var apt_2_label = $"VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments/Label2"
+onready var apt_3_label = $"VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments/Label2"
+onready var apt_1_checkbox = $"VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments/CheckBox"
+onready var apt_2_checkbox = $"VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments/CheckBox"
+onready var apt_3_checkbox = $"VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments/CheckBox"
+
+onready var apt_labels = { 1: apt_1_label, 2: apt_2_label, 3: apt_3_label }
+onready var apt_checkboxes = { 1: apt_1_checkbox, 2: apt_2_checkbox, 3: apt_3_checkbox }
+onready var apt_nums = { 1: 0, 2: 0, 3: 0 }
+onready var apt_goal = { 1: 0, 2: 0, 3: 0 }
+
 func set_money(amount):
 	money_label.text = str(amount)
 
@@ -18,6 +30,34 @@ func set_insufficient(insufficient):
 	
 	money_symbol.add_color_override("font_color", color)
 	money_label.add_color_override("font_color", color)
+
+func set_objective(apt_1, apt_2, apt_3):
+	apt_1_label.text = "0/%d" % apt_1
+	apt_2_label.text = "0/%d" % apt_2
+	apt_3_label.text = "0/%d" % apt_3
+	
+	apt_goal[1] = apt_1
+	apt_goal[2] = apt_2
+	apt_goal[3] = apt_3
+	
+	for i in range(1, 3):
+		if apt_goal[i] <= 0:
+			apt_checkboxes[i].checked = true
+
+func set_maximum(apt_1, apt_2, apt_3):
+	pass
+
+func add_apartment(rooms):
+	apt_nums[rooms] += 1
+	apt_labels[rooms].text = "%d/%d" % [apt_nums[rooms], apt_goal[rooms]]
+	
+	apt_checkboxes[rooms].pressed = apt_nums[rooms] >= apt_goal[rooms]
+
+func remove_apartment(rooms):
+	apt_nums[rooms] -= 1
+	apt_labels[rooms].text = "%d/%d" % [apt_nums[rooms], apt_goal[rooms]]
+	
+	apt_checkboxes[rooms].pressed = apt_nums[rooms] >= apt_goal[rooms]
 
 func _on_MenuButton_pressed():
 	get_tree().change_scene("res://levels/MainMenu.tscn")

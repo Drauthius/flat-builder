@@ -13,6 +13,9 @@ export(int, 1000000) var money
 export(int, 100) var apartment_goal_1
 export(int, 100) var apartment_goal_2
 export(int, 100) var apartment_goal_3
+export(int, 100) var apartment_max_1
+export(int, 100) var apartment_max_2
+export(int, 100) var apartment_max_3
 
 var num_apts = { 1: 0, 2: 0, 3: 0 }
 
@@ -25,6 +28,8 @@ var max_joint_separation = 2.0
 var from = null
 var placing = null
 var cost_text = null
+
+var start_time = 0
 
 var beams = []
 var joints = []
@@ -49,6 +54,8 @@ func _ready():
 			node.connect("clicked", self, "_on_Joint_clicked")
 	
 	$GUI.set_money(money)
+	$GUI.set_objective(apartment_goal_1, apartment_goal_2, apartment_goal_3)
+	$GUI.set_maximum(apartment_max_1, apartment_max_2, apartment_max_3)
 	# Connect GUI signals
 	# (Done here and not in the editor to avoid the necessary set-up for each new level/scene.)
 	$GUI.connect("start_game", self, "play")
@@ -79,28 +86,40 @@ func _process(delta):
 		breakable_joints.erase(joint)
 		joint.queue_free()
 	
-	if current_mode != MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_accept"):
-		play()
-	elif current_mode != MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_cancel"):
-		_clear_placing(true)
-	elif current_mode == MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_tab"):
-		pause()
-	elif current_mode != MODES.PHYSICS_MODE:
-		var instantiate = null
-		if Input.is_action_just_pressed("apt_1") and num_apts[1] < apartment_goal_1 + 2:
-			instantiate = Apartment1x1
-		elif Input.is_action_just_pressed("apt_2") and num_apts[2] < apartment_goal_2 + 2:
-			if randi() % 2 == 0:
-				instantiate = Apartment2x1
-			else:
-				instantiate = Apartment1x2
-		elif Input.is_action_just_pressed("apt_3") and num_apts[2] < apartment_goal_3 + 2:
-			instantiate = Apartment2x2
-			
-		if instantiate:
+	if current_mode != MODES.PHYSICS_MODE:
+		if Input.is_action_just_pressed("ui_accept"):
+			play()
+		elif Input.is_action_just_pressed("ui_cancel"):
 			_clear_placing(true)
-			current_mode = MODES.APARTMENT_MODE
-			instantiate_apartment(instantiate)
+		else:
+			var instantiate = null
+			if Input.is_action_just_pressed("apt_1") and num_apts[1] < apartment_max_1:
+				instantiate = Apartment1x1
+			elif Input.is_action_just_pressed("apt_2") and num_apts[2] < apartment_max_2:
+				if randi() % 2 == 0:
+					instantiate = Apartment2x1
+				else:
+					instantiate = Apartment1x2
+			elif Input.is_action_just_pressed("apt_3") and num_apts[2] < apartment_max_3:
+				instantiate = Apartment2x2
+				
+			if instantiate:
+				_clear_placing(true)
+				current_mode = MODES.APARTMENT_MODE
+				instantiate_apartment(instantiate)
+	else:
+		if current_mode == MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_tab"):
+			pause()
+		
+		if start_time > 1.0:
+			for apartment in apartments:
+				if apartment.linear_velocity.length_squared() > 2.0:
+					return
+				
+			print("Game over!")
+			pause()
+		else:
+			start_time += delta
 
 func instantiate_apartment(type):
 	placing = type.instance()
@@ -109,6 +128,7 @@ func instantiate_apartment(type):
 
 # Start physics.
 func play():
+	start_time = 0.0
 	_clear_placing(true)
 	current_mode = MODES.PHYSICS_MODE
 	print("PHYSICS!")
@@ -126,6 +146,7 @@ func play():
 
 # Stop physics
 func pause():
+	start_time = 0.0
 	_clear_placing(true)
 	print("no physics")
 	for beam in beams:
@@ -309,17 +330,34 @@ func _place_beam(position, other_joint = null):
 func _place_apartment(position):
 	placing.set_position(position)
 	placing.connect("destroyed", self, "_on_Apartment_destroyed")
+	var num_rooms = 0
 	if "1x1" in placing.get_name():
-		num_apts[1] += 1
+		num_rooms = 1
 	elif "1x2" in placing.get_name() or "2x1" in placing.get_name():
-		num_apts[2] += 1
+		num_rooms = 2
 	elif "2x2" in placing.get_name():
-		num_apts[3] += 1
-	else:
-		assert(false) # Unknown piece
+		num_rooms = 3
+	
+	assert(num_rooms > 0)
+	num_apts[num_rooms] += 1
+	$GUI.add_apartment(num_rooms)
 	
 	apartments.append(placing)
 	_clear_placing(false)
+
+func _on_Apartment_destroyed(object):
+	var num_rooms = 0
+	if "1x1" in object.get_name():
+		num_rooms = 1
+	elif "1x2" in object.get_name() or "2x1" in object.get_name():
+		num_rooms = 2
+	elif "2x2" in object.get_name():
+		num_rooms = 3
+	
+	assert(num_rooms > 0)
+	num_apts[num_rooms] -= 1
+	$GUI.remove_apartment(num_rooms)	
+	apartments.erase(object)
 
 func _clear_placing(free):
 	# Reset the current mode to the default.
@@ -332,6 +370,3 @@ func _clear_placing(free):
 	cost_text = null
 	placing = null
 	from = null
-
-func _on_Apartment_destroyed(object):
-	apartments.erase(object)

@@ -7,6 +7,7 @@ var Apartment2x2 = preload("res://scenes/Apartment2x2.tscn")
 var Beam = preload("res://scenes/Beam.tscn")
 var BeamSprite = preload("res://scenes/BeamSprite.tscn")
 var CostText = preload("res://scenes/CostText.tscn")
+var SoundService = preload("res://scripts/SoundService.gd").new()
 
 export(int, 1000000) var money
 var min_beam_length = 16
@@ -31,6 +32,8 @@ enum MODES {
 }
 
 func _ready():
+	SoundService.call_my_var()
+	
 	current_mode = MODES.BEAM_MODE
 	
 	# Add the ground joints that are available in the level (identified as RigidBody2D).

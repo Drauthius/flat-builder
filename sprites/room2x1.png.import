@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sky.png-8fa0f55909e672d3ba612a05ac524628.stex"
+path="res://.import/room2x1.png-e0da681679aac597c073dbe8183b1c09.stex"
 
 [deps]
 
-source_file="res://sprites/sky.png"
-dest_files=[ "res://.import/sky.png-8fa0f55909e672d3ba612a05ac524628.stex" ]
+source_file="res://sprites/room2x1.png"
+dest_files=[ "res://.import/room2x1.png-e0da681679aac597c073dbe8183b1c09.stex" ]
 
 [params]
 

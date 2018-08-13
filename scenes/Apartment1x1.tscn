@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Apartment.gd" type="Script" id=1]
-[ext_resource path="res://sprites/room.png" type="Texture" id=2]
+[ext_resource path="res://sprites/room1x1.png" type="Texture" id=2]
 
 [node name="Apartment1x1" type="RigidBody2D" index="0"]
 

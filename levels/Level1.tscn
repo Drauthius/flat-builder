@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://sprites/landscape.png" type="Texture" id=2]
@@ -7,22 +7,52 @@
 [ext_resource path="res://sprites/grass-r.png" type="Texture" id=5]
 [ext_resource path="res://scenes/GroundJoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://resources/menu_font.tres" type="DynamicFont" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 924.544, 66.0884 )
 
+[sub_resource type="StyleBoxFlat" id=2]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 0.211765, 0.215686, 0.196078, 0.584314 )
+draw_center = true
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.8, 0.8, 0.8, 1 )
+border_blend = false
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+_sections_unfolded = [ "Border", "Border Width", "Corner Radius" ]
+
 [node name="Level1" type="Node" index="0"]
 
 script = ExtResource( 1 )
 money = 3000
-apartment_goal_1 = 2
-apartment_goal_2 = 2
+apartment_goal_1 = 4
+apartment_goal_2 = 4
 apartment_goal_3 = 2
-apartment_max_1 = 2
-apartment_max_2 = 2
-apartment_max_3 = 2
+apartment_max_1 = 8
+apartment_max_2 = 8
+apartment_max_3 = 8
 
 [node name="Sky" type="TextureRect" parent="." index="0"]
 
@@ -132,5 +162,115 @@ position = Vector2( -1.2605, 53.5713 )
 shape = SubResource( 1 )
 
 [node name="GUI" parent="." index="7" instance=ExtResource( 7 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="8"]
+
+layer = 2
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Panel" type="Panel" parent="CanvasLayer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+margin_top = -20.0
+margin_right = 300.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 300, 200 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/panel = SubResource( 2 )
+_sections_unfolded = [ "Rect" ]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Panel" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/MarginContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_right = 300.0
+margin_bottom = 200.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+[node name="Header" type="Label" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 292.0
+margin_bottom = 35.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 8 )
+text = "Instructions"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 39.0
+margin_right = 292.0
+margin_bottom = 200.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "The goal is to build at least as many apartments as can be seen in the [b]Objectives[/b] panel. Use the number keys 1-3 or the buttoms to the right.
+[i]Beams[/i] can be placed by clicking on a [i]joint[/i]; the white balls on the ground and on each end of a beam.
+Play to see whether your creation holds up."
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "The goal is to build at least as many apartments as can be seen in the Objectives panel. Use the number keys 1-3 or the buttoms to the right.
+Beams can be placed by clicking on a joint; the white balls on the ground and on each end of a beam.
+Play to see whether your creation holds up."
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "BBCode" ]
 
 

@@ -1,0 +1,264 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Game.gd" type="Script" id=1]
+[ext_resource path="res://sprites/landscape.png" type="Texture" id=2]
+[ext_resource path="res://sprites/mountain-wall.png" type="Texture" id=3]
+[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/GroundJoint.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 83.5874, 66.0884 )
+
+[node name="Level1" type="Node" index="0"]
+
+script = ExtResource( 1 )
+money = 5000
+
+[node name="Sky" type="TextureRect" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 0
+
+[node name="WallLeft" type="TextureRect" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 209.0
+margin_bottom = 1080.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
+_sections_unfolded = [ "Hint", "Margin", "Rect" ]
+
+[node name="GUI" parent="." index="2" instance=ExtResource( 4 )]
+
+[node name="GroundJoint" parent="." index="3" instance=ExtResource( 5 )]
+
+position = Vector2( 185.727, 161.11 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility" ]
+
+[node name="GroundJoint2" parent="." index="4" instance=ExtResource( 5 )]
+
+position = Vector2( 78.6132, 695.435 )
+
+[node name="GroundJoint3" parent="." index="5" instance=ExtResource( 5 )]
+
+position = Vector2( 118.064, 377.655 )
+
+[node name="GroundJoint4" parent="." index="6" instance=ExtResource( 5 )]
+
+position = Vector2( 77.5558, 550.829 )
+
+[node name="GroundJoint5" parent="." index="7" instance=ExtResource( 5 )]
+
+position = Vector2( 110.422, 891.863 )
+
+[node name="Area2D" type="StaticBody2D" parent="." index="8"]
+
+position = Vector2( 13.2062, 965.386 )
+rotation = 0.152889
+input_pickable = false
+collision_layer = 3
+collision_mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+position = Vector2( 0.670279, 83.5454 )
+rotation = 1.9273e-005
+scale = Vector2( 1, 1.41919 )
+shape = SubResource( 1 )
+
+[node name="Area2D2" type="StaticBody2D" parent="." index="9"]
+
+position = Vector2( 38.831, 792.042 )
+rotation = 0.118897
+input_pickable = false
+collision_layer = 3
+collision_mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" index="0"]
+
+position = Vector2( -12.4424, 88.1479 )
+rotation = -0.109491
+scale = Vector2( 1, 1.41919 )
+shape = SubResource( 1 )
+
+[node name="Area2D3" type="StaticBody2D" parent="." index="10"]
+
+position = Vector2( -9.72826, 669.472 )
+rotation = -0.209849
+scale = Vector2( 1, 0.822542 )
+input_pickable = false
+collision_layer = 3
+collision_mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3" index="0"]
+
+position = Vector2( -12.4424, 88.1479 )
+rotation = -0.109491
+scale = Vector2( 1, 1.41919 )
+shape = SubResource( 1 )
+
+[node name="Area2D4" type="StaticBody2D" parent="." index="11"]
+
+position = Vector2( 2.33045, 544.363 )
+rotation = 0.120908
+scale = Vector2( 1, 0.822542 )
+input_pickable = false
+collision_layer = 3
+collision_mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4" index="0"]
+
+position = Vector2( -12.4424, 88.1479 )
+rotation = -0.109491
+scale = Vector2( 1, 1.41919 )
+shape = SubResource( 1 )
+
+[node name="Area2D5" type="StaticBody2D" parent="." index="12"]
+
+position = Vector2( 32.4773, 437.341 )
+rotation = 0.414725
+scale = Vector2( 1, 0.822542 )
+input_pickable = false
+collision_layer = 3
+collision_mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D5" index="0"]
+
+position = Vector2( -28.0873, 89.8678 )
+rotation = -0.109491
+scale = Vector2( 1.18177, 1.41919 )
+shape = SubResource( 1 )
+
+[node name="Area2D6" type="StaticBody2D" parent="." index="13"]
+
+position = Vector2( 56.5947, 295.651 )
+rotation = 0.304774
+scale = Vector2( 1, 0.822542 )
+input_pickable = false
+collision_layer = 3
+collision_mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D6" index="0"]
+
+position = Vector2( -42.5831, 91.4613 )
+rotation = -0.109491
+scale = Vector2( 1.35019, 1.41919 )
+shape = SubResource( 1 )
+
+[node name="Area2D7" type="StaticBody2D" parent="." index="14"]
+
+position = Vector2( 97.293, 178.079 )
+rotation = 0.49671
+scale = Vector2( 1, 0.822542 )
+input_pickable = false
+collision_layer = 3
+collision_mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D7" index="0"]
+
+position = Vector2( -40.3992, 91.2212 )
+rotation = -0.109491
+scale = Vector2( 1.32482, 1.41919 )
+shape = SubResource( 1 )
+
+[node name="Area2D8" type="StaticBody2D" parent="." index="15"]
+
+position = Vector2( 137.991, 99.6974 )
+rotation = 0.630991
+scale = Vector2( 1, 0.822542 )
+input_pickable = false
+collision_layer = 3
+collision_mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D8" index="0"]
+
+position = Vector2( -49.6576, 92.239 )
+rotation = -0.109491
+scale = Vector2( 1.43239, 1.41919 )
+shape = SubResource( 1 )
+
+[node name="Area2D9" type="StaticBody2D" parent="." index="16"]
+
+position = Vector2( 151.557, -26.9192 )
+rotation = 0.276109
+scale = Vector2( 1, 0.822542 )
+input_pickable = false
+collision_layer = 3
+collision_mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D9" index="0"]
+
+position = Vector2( -39.7133, 91.1458 )
+rotation = -0.109491
+scale = Vector2( 1.31685, 1.41919 )
+shape = SubResource( 1 )
+
+

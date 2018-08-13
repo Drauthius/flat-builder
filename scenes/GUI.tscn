@@ -1,11 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://GUI.gd" type="Script" id=1]
 [ext_resource path="res://resources/font_theme.tres" type="Theme" id=2]
-[ext_resource path="res://sprites/menu.png" type="Texture" id=3]
-[ext_resource path="res://sprites/menu3.png" type="Texture" id=4]
-[ext_resource path="res://sprites/menu2.png" type="Texture" id=5]
-[ext_resource path="res://fonts/MontereyFLF-Bold.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://fonts/MontereyFLF-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://sprites/menu.png" type="Texture" id=4]
+[ext_resource path="res://sprites/menu3.png" type="Texture" id=5]
+[ext_resource path="res://sprites/menu2.png" type="Texture" id=6]
 [ext_resource path="res://fonts/MontereyFLF.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://sprites/play.png" type="Texture" id=8]
 [ext_resource path="res://sprites/play3.png" type="Texture" id=9]
@@ -14,12 +14,20 @@
 [ext_resource path="res://sprites/refresh3.png" type="Texture" id=12]
 [ext_resource path="res://sprites/refresh2.png" type="Texture" id=13]
 
+[sub_resource type="DynamicFont" id=3]
+
+size = 85
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 3 )
+_sections_unfolded = [ "Font", "Settings" ]
+
 [sub_resource type="DynamicFont" id=1]
 
 size = 48
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 6 )
+font_data = ExtResource( 3 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
@@ -30,7 +38,7 @@ use_filter = false
 font_data = ExtResource( 7 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="GUI" type="MarginContainer"]
+[node name="GUI" type="MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -74,7 +82,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1892.0
-margin_bottom = 70.0
+margin_bottom = 93.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -90,8 +98,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_top = 11.0
 margin_right = 40.0
-margin_bottom = 70.0
+margin_bottom = 81.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -113,21 +122,50 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 44.0
 margin_right = 200.0
-margin_bottom = 70.0
+margin_bottom = 93.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 2
+size_flags_horizontal = 1
 size_flags_vertical = 1
 theme = ExtResource( 2 )
 text = "1000"
+valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Mouse", "Size Flags", "Theme" ]
 
-[node name="MenuButton" type="TextureButton" parent="VBoxContainer/TopContainer" index="2"]
+[node name="Mode" type="Label" parent="VBoxContainer/TopContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 204.0
+margin_right = 1824.0
+margin_bottom = 93.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "Mode Text"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_constants" ]
+
+[node name="MenuButton" type="TextureButton" parent="VBoxContainer/TopContainer" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -135,7 +173,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 1828.0
 margin_right = 1892.0
-margin_bottom = 70.0
+margin_bottom = 93.0
 rect_min_size = Vector2( 64, 64 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -148,10 +186,11 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 4 )
-texture_hover = ExtResource( 5 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 6 )
 expand = true
+stretch_mode = 4
 _sections_unfolded = [ "Rect", "Size Flags", "Textures" ]
 
 [node name="ObjectivesContainer" type="HBoxContainer" parent="VBoxContainer" index="1"]
@@ -160,9 +199,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 74.0
+margin_top = 97.0
 margin_right = 1892.0
-margin_bottom = 574.0
+margin_bottom = 297.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -180,15 +219,15 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 1592.0
 margin_right = 1892.0
-margin_bottom = 500.0
-rect_min_size = Vector2( 300, 500 )
+margin_bottom = 200.0
+rect_min_size = Vector2( 300, 200 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 1, 1, 1, 0.196078 )
+color = Color( 1, 1, 1, 0.588235 )
 _sections_unfolded = [ "Mouse", "Rect" ]
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/ObjectivesContainer/Background" index="0"]
@@ -207,7 +246,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0.827451, 0.866667, 0.615686, 0.196078 )
+color = Color( 0.215412, 0.21875, 0.197388, 0.588235 )
 _sections_unfolded = [ "Margin" ]
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ObjectivesContainer/Background/ColorRect" index="0"]
@@ -234,7 +273,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
 margin_right = 288.0
-margin_bottom = 490.0
+margin_bottom = 190.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -330,7 +369,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 24.0
-margin_bottom = 26.0
+margin_bottom = 24.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -570,7 +609,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 578.0
+margin_top = 301.0
 margin_right = 1892.0
 margin_bottom = 1060.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -590,7 +629,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 1828.0
 margin_right = 1892.0
-margin_bottom = 482.0
+margin_bottom = 759.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -606,9 +645,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 350.0
+margin_top = 627.0
 margin_right = 64.0
-margin_bottom = 414.0
+margin_bottom = 691.0
 rect_min_size = Vector2( 64, 64 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -617,13 +656,14 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-toggle_mode = false
+toggle_mode = true
 enabled_focus_mode = 2
 shortcut = null
 group = null
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 9 )
 texture_hover = ExtResource( 10 )
+texture_disabled = ExtResource( 9 )
 expand = true
 _sections_unfolded = [ "Rect", "Textures" ]
 
@@ -633,9 +673,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 418.0
+margin_top = 695.0
 margin_right = 64.0
-margin_bottom = 482.0
+margin_bottom = 759.0
 rect_min_size = Vector2( 64, 64 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false

@@ -2,6 +2,9 @@ extends MarginContainer
 
 signal start_game
 
+onready var mode_label = $VBoxContainer/TopContainer/Mode
+onready var start_button = $VBoxContainer/ButtonsContainer/Buttons/StartButton
+
 onready var money_symbol = $VBoxContainer/TopContainer/MoneySymbol
 onready var money_label = $VBoxContainer/TopContainer/Money
 
@@ -16,6 +19,24 @@ onready var apt_labels = { 1: apt_1_label, 2: apt_2_label, 3: apt_3_label }
 onready var apt_checkboxes = { 1: apt_1_checkbox, 2: apt_2_checkbox, 3: apt_3_checkbox }
 onready var apt_nums = { 1: 0, 2: 0, 3: 0 }
 onready var apt_goal = { 1: 0, 2: 0, 3: 0 }
+
+func set_build_mode():
+	mode_label.text = "Build Mode"
+	mode_label.add_color_override("font_color", Color(1.0, 1.0, 0.6))
+	start_button.disabled = false
+	start_button.pressed = false
+
+func set_simulation_mode():
+	mode_label.text = "Simulation Mode"
+	mode_label.add_color_override("font_color", Color(0.6, 1.0, 1.0))
+	start_button.pressed = true
+	start_button.disabled = true
+
+func set_winning_mode():
+	mode_label.text = "Winner!"
+	mode_label.add_color_override("font_color", Color(0.6, 1.0, 0.6))
+	start_button.disabled = false
+	start_button.pressed = false
 
 func set_money(amount):
 	money_label.text = str(amount)

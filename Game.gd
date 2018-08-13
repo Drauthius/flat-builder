@@ -24,13 +24,14 @@ var max_beam_length = 128
 var min_beam_cost = 25
 var max_beam_cost = 100
 var max_joint_separation = 2.0
+var max_movement_threshold = 1.0
+var play_time_wait = 3.0
 
 var from = null
 var placing = null
 var cost_text = null
 
-var start_time = 0
-
+var start_time
 var beams = []
 var joints = []
 var breakable_joints = []
@@ -53,6 +54,7 @@ func _ready():
 			# Connect the click event for the joint
 			node.connect("clicked", self, "_on_Joint_clicked")
 	
+	$GUI.set_build_mode()
 	$GUI.set_money(money)
 	$GUI.set_objective(apartment_goal_1, apartment_goal_2, apartment_goal_3)
 	$GUI.set_maximum(apartment_max_1, apartment_max_2, apartment_max_3)
@@ -111,13 +113,14 @@ func _process(delta):
 		if current_mode == MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_tab"):
 			pause()
 		
-		if start_time > 1.0:
+		if start_time > play_time_wait: # Need to wait at least this time for things to start moving.
 			for apartment in apartments:
-				if apartment.linear_velocity.length_squared() > 2.0:
+				if apartment.linear_velocity.length_squared() > max_movement_threshold:
 					return
 				
-			print("Game over!")
 			pause()
+			if num_apts[1] >= apartment_goal_1 and num_apts[2] >= apartment_goal_2 and num_apts[3] >= apartment_goal_3:
+				$GUI.set_winning_mode()
 		else:
 			start_time += delta
 
@@ -131,7 +134,7 @@ func play():
 	start_time = 0.0
 	_clear_placing(true)
 	current_mode = MODES.PHYSICS_MODE
-	print("PHYSICS!")
+	$GUI.set_simulation_mode()
 	for beam in beams:
 		beam.get_node("Mid").mode = RigidBody2D.MODE_RIGID
 		beam.get_node("Left").mode = RigidBody2D.MODE_RIGID
@@ -148,7 +151,7 @@ func play():
 func pause():
 	start_time = 0.0
 	_clear_placing(true)
-	print("no physics")
+	$GUI.set_build_mode()
 	for beam in beams:
 		beam.get_node("Mid").mode = RigidBody2D.MODE_KINEMATIC
 		beam.get_node("Left").mode = RigidBody2D.MODE_KINEMATIC

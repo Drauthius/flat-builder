@@ -2,18 +2,18 @@ extends MarginContainer
 
 signal start_game
 
-onready var mode_label = $VBoxContainer/TopContainer/Mode
-onready var start_button = $VBoxContainer/ButtonsContainer/Buttons/StartButton
+onready var mode_label = $CanvasLayer/VBoxContainer/TopContainer/Mode
+onready var start_button = $CanvasLayer/VBoxContainer/ButtonsContainer/Buttons/StartButton
 
-onready var money_symbol = $VBoxContainer/TopContainer/MoneySymbol
-onready var money_label = $VBoxContainer/TopContainer/Money
+onready var money_symbol = $CanvasLayer/VBoxContainer/TopContainer/MoneySymbol
+onready var money_label = $CanvasLayer/VBoxContainer/TopContainer/Money
 
-onready var apt_1_label = $"VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments/Label2"
-onready var apt_2_label = $"VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments/Label2"
-onready var apt_3_label = $"VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments/Label2"
-onready var apt_1_checkbox = $"VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments/CheckBox"
-onready var apt_2_checkbox = $"VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments/CheckBox"
-onready var apt_3_checkbox = $"VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments/CheckBox"
+onready var apt_1_label = $"CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments/Label2"
+onready var apt_2_label = $"CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments/Label2"
+onready var apt_3_label = $"CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments/Label2"
+onready var apt_1_checkbox = $"CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/1RoomApartments/CheckBox"
+onready var apt_2_checkbox = $"CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/2RoomApartments/CheckBox"
+onready var apt_3_checkbox = $"CanvasLayer/VBoxContainer/ObjectivesContainer/Background/ColorRect/MarginContainer/VBoxContainer/3RoomApartments/CheckBox"
 
 onready var apt_labels = { 1: apt_1_label, 2: apt_2_label, 3: apt_3_label }
 onready var apt_checkboxes = { 1: apt_1_checkbox, 2: apt_2_checkbox, 3: apt_3_checkbox }

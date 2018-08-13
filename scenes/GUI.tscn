@@ -656,4 +656,8 @@ _sections_unfolded = [ "Rect", "Textures" ]
 
 [connection signal="pressed" from="VBoxContainer/TopContainer/MenuButton" to="." method="_on_MenuButton_pressed"]
 
+[connection signal="button_up" from="VBoxContainer/ButtonsContainer/Buttons/StartButton" to="." method="_on_StartButton_button_up"]
+
+[connection signal="button_up" from="VBoxContainer/ButtonsContainer/Buttons/RestartButton" to="." method="_on_RestartButton_button_up"]
+
 

@@ -10,6 +10,12 @@ var CostText = preload("res://scenes/CostText.tscn")
 var SoundService = preload("res://scripts/SoundService.gd").new()
 
 export(int, 1000000) var money
+export(int, 100) var apartment_goal_1
+export(int, 100) var apartment_goal_2
+export(int, 100) var apartment_goal_3
+
+var num_apts = { 1: 0, 2: 0, 3: 0 }
+
 var min_beam_length = 16
 var max_beam_length = 128
 var min_beam_cost = 25
@@ -45,9 +51,7 @@ func _ready():
 	$GUI.set_money(money)
 	# Connect GUI signals
 	# (Done here and not in the editor to avoid the necessary set-up for each new level/scene.)
-	$GUI/VBoxContainer/TopContainer/MenuButton.connect("button_up", self, "_on_MenuButton_up")
-	$GUI/VBoxContainer/ButtonsContainer/Buttons/StartButton.connect("button_up", self, "_on_StartButton_up")
-	$GUI/VBoxContainer/ButtonsContainer/Buttons/RestartButton.connect("button_up", self, "_on_RestartButton_up")
+	$GUI.connect("start_game", self, "play")
 
 func _process(delta):
 	if placing and current_mode == MODES.BEAM_MODE:
@@ -82,22 +86,23 @@ func _process(delta):
 	elif current_mode == MODES.PHYSICS_MODE and Input.is_action_just_pressed("ui_tab"):
 		pause()
 	elif current_mode != MODES.PHYSICS_MODE:
-		var instanciate = null
-		if Input.is_key_pressed(KEY_1):
-			instanciate = Apartment1x1
-		elif Input.is_key_pressed(KEY_2):
-			instanciate = Apartment2x1
-		elif Input.is_key_pressed(KEY_3):
-			instanciate = Apartment1x2
-		elif Input.is_key_pressed(KEY_4):
-			instanciate = Apartment2x2
+		var instantiate = null
+		if Input.is_action_just_pressed("apt_1") and num_apts[1] < apartment_goal_1 + 2:
+			instantiate = Apartment1x1
+		elif Input.is_action_just_pressed("apt_2") and num_apts[2] < apartment_goal_2 + 2:
+			if randi() % 2 == 0:
+				instantiate = Apartment2x1
+			else:
+				instantiate = Apartment1x2
+		elif Input.is_action_just_pressed("apt_3") and num_apts[2] < apartment_goal_3 + 2:
+			instantiate = Apartment2x2
 			
-		if instanciate:
+		if instantiate:
 			_clear_placing(true)
 			current_mode = MODES.APARTMENT_MODE
-			instanciate_apartment(instanciate)
+			instantiate_apartment(instantiate)
 
-func instanciate_apartment(type):
+func instantiate_apartment(type):
 	placing = type.instance()
 	add_child(placing)
 	placing.set_position(get_viewport().get_mouse_position())
@@ -189,10 +194,9 @@ func _unhandled_input(event):
 	elif current_mode == MODES.APARTMENT_MODE:
 		get_tree().set_input_as_handled() # Marked as handled.
 		
-		# Update the placing node, so that _place_beam puts the end at the right place.
+		# Update, in case it isn't exactly on the mouse.
 		_update_placing_apartment()
-		print("apartment input")
-
+		
 		_place_apartment(event.position)
 
 # Called when a joint (ground or from a beam) is clicked.
@@ -258,7 +262,7 @@ func _place_beam(position, other_joint = null):
 		beam.get_node("Mid").add_child(right_joint)
 		
 		# Recreate the collision shape, since it is shared among all beams, but they need to be unique (since the length might be different).
-		beam.get_node("Mid/CollisionShape2D").set_shape(beam.get_node("Mid/CollisionShape2D").get_shape().duplicate(true))
+		beam.get_node("Mid/CollisionShape2D").set_shape(beam.get_node("Mid/CollisionShape2D").get_shape().duplicate())
 		# Set the length of the collision shape (minus a small offset)
 		beam.get_node("Mid/CollisionShape2D").shape.extents.x = length / 2 - 10
 		# Set the position of the collision shape (needs to be in the middle of the beam)
@@ -305,6 +309,15 @@ func _place_beam(position, other_joint = null):
 func _place_apartment(position):
 	placing.set_position(position)
 	placing.connect("destroyed", self, "_on_Apartment_destroyed")
+	if "1x1" in placing.get_name():
+		num_apts[1] += 1
+	elif "1x2" in placing.get_name() or "2x1" in placing.get_name():
+		num_apts[2] += 1
+	elif "2x2" in placing.get_name():
+		num_apts[3] += 1
+	else:
+		assert(false) # Unknown piece
+	
 	apartments.append(placing)
 	_clear_placing(false)
 
@@ -319,16 +332,6 @@ func _clear_placing(free):
 	cost_text = null
 	placing = null
 	from = null
-
-func _on_MenuButton_up():
-	print("Menu!") # TODO: Go to menu scene
-
-func _on_StartButton_up():
-	play()
-	# TODO: Set the start-button in "pressed" mode (and disable it)
-
-func _on_RestartButton_up():
-	get_tree().reload_current_scene()
 
 func _on_Apartment_destroyed(object):
 	apartments.erase(object)

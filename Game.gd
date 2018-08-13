@@ -33,7 +33,11 @@ enum MODES {
 var current_mode = MODES.BEAM_MODE
 
 func _ready():
-	SoundService.call_my_var()
+	player = AudioStreamPlayer.new()
+	add_child(player)
+	player.stream = load("res://music/beam_placement_selection.wav")
+	
+	SoundService.attach_audiostream_players(self)
 	
 	# Add the ground joints that are available in the level (identified as RigidBody2D).
 	for node in get_children():
@@ -211,6 +215,7 @@ func _on_Joint_clicked(joint):
 		cost_text = CostText.instance()
 		add_child(cost_text)
 		cost_text.position = from.position - Vector2(20, 40)
+		SoundService.beam_placement_selection()
 	#else:
 		# The above _unhandled_event gets the event before the click event on the joint.
 
@@ -292,6 +297,9 @@ func _place_beam(position, other_joint = null):
 			joint.node_a = other_joint.get_path()
 			joint.node_b = beam.get_node("Right").get_path()
 			breakable_joints.append(joint)
+			SoundService.beam_placement_finalise()
+		else:
+			SoundService.beam_placement_selection()
 
 	# Clear the placing stuff.
 	_clear_placing(true)

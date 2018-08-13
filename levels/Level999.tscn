@@ -1,28 +1,21 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
-[ext_resource path="res://sprites/landscape.png" type="Texture" id=2]
-[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=3]
-[ext_resource path="res://sprites/grass.png" type="Texture" id=4]
-[ext_resource path="res://sprites/grass-l.png" type="Texture" id=5]
-[ext_resource path="res://sprites/grass-r.png" type="Texture" id=6]
-[ext_resource path="res://scenes/GroundJoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sprites/landscape2.png" type="Texture" id=2]
+[ext_resource path="res://sprites/mountain-wall.png" type="Texture" id=3]
+[ext_resource path="res://scenes/GroundJoint.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=5]
 
-[sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
-extents = Vector2( 72, 40 )
-
-[node name="Level1" type="Node"]
+[node name="Level999" type="Node" index="0"]
 
 script = ExtResource( 1 )
-money = 500000
-apartment_goal_1 = null
-apartment_goal_2 = null
-apartment_goal_3 = null
-apartment_max_1 = null
-apartment_max_2 = null
-apartment_max_3 = null
+money = 2000
+apartment_goal_1 = 4
+apartment_goal_2 = 6
+apartment_goal_3 = 4
+apartment_max_1 = 4
+apartment_max_2 = 6
+apartment_max_3 = 4
 
 [node name="Sky" type="TextureRect" parent="." index="0"]
 
@@ -30,6 +23,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 10.0
+margin_bottom = 10.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -39,75 +36,52 @@ size_flags_vertical = 1
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 0
+_sections_unfolded = [ "Margin" ]
 
-[node name="GUI" parent="." index="1" instance=ExtResource( 3 )]
-
-[node name="Left Side" type="Node2D" parent="." index="2"]
-
-position = Vector2( 263.74, 1030.36 )
-
-[node name="GrassTiles" type="TextureRect" parent="Left Side" index="0"]
+[node name="WallLeft" type="TextureRect" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -26.0
-margin_right = 974.0
-margin_bottom = 1000.0
-rect_scale = Vector2( 0.05, 0.05 )
+margin_right = 209.0
+margin_bottom = 1080.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+rect_clip_content = true
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
+expand = true
 stretch_mode = 2
-_sections_unfolded = [ "Margin", "Rect" ]
+_sections_unfolded = [ "Hint", "Margin", "Rect" ]
 
-[node name="GrassLeft" type="TextureRect" parent="Left Side" index="1"]
+[node name="GroundJoint" parent="." index="2" instance=ExtResource( 4 )]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -76.0
-margin_right = 924.0
-margin_bottom = 1000.0
-rect_scale = Vector2( 0.05, 0.05 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-texture = ExtResource( 5 )
-stretch_mode = 2
-_sections_unfolded = [ "Rect" ]
+position = Vector2( 185.727, 161.11 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility" ]
 
-[node name="GrassRight" type="TextureRect" parent="Left Side" index="2"]
+[node name="GroundJoint2" parent="." index="3" instance=ExtResource( 4 )]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 24.0
-margin_right = 1024.0
-margin_bottom = 1000.0
-rect_scale = Vector2( 0.05, 0.05 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-texture = ExtResource( 6 )
-stretch_mode = 2
+position = Vector2( 78.6132, 695.435 )
 
-[node name="Area2D" type="StaticBody2D" parent="Left Side" index="3"]
+[node name="GroundJoint3" parent="." index="4" instance=ExtResource( 4 )]
 
-position = Vector2( 0, 75 )
+position = Vector2( 118.064, 377.655 )
+
+[node name="GroundJoint4" parent="." index="5" instance=ExtResource( 4 )]
+
+position = Vector2( 73.9634, 561.008 )
+
+[node name="GroundJoint5" parent="." index="6" instance=ExtResource( 4 )]
+
+position = Vector2( 110.422, 891.863 )
+
+[node name="Area2D" type="StaticBody2D" parent="." index="7"]
+
+position = Vector2( 13.2062, 965.386 )
+rotation = 0.152889
 input_pickable = false
 collision_layer = 3
 collision_mask = 3
@@ -115,117 +89,14 @@ constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
-_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
-__meta__ = {
-"_edit_group_": true
-}
+_sections_unfolded = [ "Collision", "Pickable" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Left Side/Area2D" index="0"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" index="0"]
 
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
+rotation = -2.65365
+build_mode = 0
+polygon = PoolVector2Array( -125.421, -53.254, -116.928, -28.3277, -96.9949, -3.27429, -97.8365, 12.3235, -71.3579, 42.1885, -67.4443, 56.449, 14.8785, 169.831, 30.1729, 182.325, 49.8687, 205.729, 76.0399, 225.797, 120.523, 249.386, 210.535, 360.902, 220.822, 393.676, 228.473, 402.126, 225.955, 414.115, 234.039, 422.242, 237.219, 445.486, 264.782, 484.25, 270.01, 509.337, 285.921, 540.612, 296.149, 555.229, 305.034, 587.026, 317.435, 597.326, 318.383, 606.731, 328.83, 619.836, 327.378, 637.772, 338.67, 658.336, 338.436, 665.252, 341.879, 670.773, 341.785, 705.896, 355.597, 754.241, 356.076, 777.478, 365.643, 796.633, 382.126, 816.022, 392.538, 842.635, 421.592, 889.724, 642.39, 725.72, 3.53192, -148.024, -124.138, -53.4772 )
 
-[node name="Right Side" type="Node2D" parent="." index="3"]
-
-position = Vector2( 1574.67, 1030.36 )
-
-[node name="GrassTiles" type="TextureRect" parent="Right Side" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -26.0
-margin_right = 974.0
-margin_bottom = 1000.0
-rect_scale = Vector2( 0.05, 0.05 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-texture = ExtResource( 4 )
-stretch_mode = 2
-_sections_unfolded = [ "Margin", "Rect" ]
-
-[node name="GrassLeft" type="TextureRect" parent="Right Side" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -76.0
-margin_right = 924.0
-margin_bottom = 1000.0
-rect_scale = Vector2( 0.05, 0.05 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-texture = ExtResource( 5 )
-stretch_mode = 2
-_sections_unfolded = [ "Rect" ]
-
-[node name="GrassRight" type="TextureRect" parent="Right Side" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 24.0
-margin_right = 1024.0
-margin_bottom = 1000.0
-rect_scale = Vector2( 0.05, 0.05 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-texture = ExtResource( 6 )
-stretch_mode = 2
-
-[node name="Area2D" type="StaticBody2D" parent="Right Side" index="3"]
-
-position = Vector2( 0, 75 )
-input_pickable = false
-collision_layer = 3
-collision_mask = 3
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Right Side/Area2D" index="0"]
-
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="GroundJoint" parent="." index="4" instance=ExtResource( 7 )]
-
-position = Vector2( 222.733, 1050 )
-_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
-
-[node name="GroundJoint2" parent="." index="5" instance=ExtResource( 7 )]
-
-position = Vector2( 1535.6, 1050 )
-_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
-
-[node name="GroundJoint3" parent="." index="6" instance=ExtResource( 7 )]
-
-position = Vector2( 1613.62, 1050 )
-_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
-
-[node name="GroundJoint4" parent="." index="7" instance=ExtResource( 7 )]
-
-position = Vector2( 301.829, 1050 )
-_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
+[node name="GUI" parent="." index="8" instance=ExtResource( 5 )]
 
 

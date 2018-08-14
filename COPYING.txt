@@ -1,0 +1,8 @@
+This project includes different licenses, and listed below.
+
+Component                  Directory           License
+----------------------------------------------------------------------
+Flat Builder source        .                   GPLv3
+Flat Builder art           sprites/            Creative Common BY-SA 4.0
+Flat Builder sound         music/              Creative Common BY-SA 4.0
+Fonts                      fonts/              See fonts/LICENSE.txt

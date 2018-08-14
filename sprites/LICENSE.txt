@@ -1,0 +1,11 @@
+Flat Builder (c) by Albert Diserholt, Sunisa Diserholt, Pierre Althinsson, Worai Col
+
+Flat Builder's art is licensed under a
+Creative Commons Attribution-ShareAlike 4.0 International License.
+
+You should have received a copy of the license along with this
+work. If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
+
+
+The file whitePuff24.png was created by Kenny, under the CC0 license, available
+at https://opengameart.org/content/smoke-particle-assets

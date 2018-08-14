@@ -118,6 +118,9 @@ func _process(delta):
 			pause()
 			if num_apts[1] >= apartment_goal_1 and num_apts[2] >= apartment_goal_2 and num_apts[3] >= apartment_goal_3:
 				$GUI.set_winning_mode()
+				SoundService.winner01()
+			else:
+				SoundService.physics_pause()
 		else:
 			start_time += delta
 
@@ -149,7 +152,7 @@ func instantiate_apartment(rooms):
 
 # Start physics.
 func play():
-#	SoundService.physics_pause()
+	SoundService.physics_start()
 	start_time = 0.0
 	_clear_placing(true)
 	current_mode = MODES.PHYSICS_MODE
@@ -168,7 +171,6 @@ func play():
 
 # Stop physics
 func pause():
-#	SoundService.physics_pause()
 	start_time = 0.0
 	_clear_placing(true)
 	$GUI.set_build_mode()
